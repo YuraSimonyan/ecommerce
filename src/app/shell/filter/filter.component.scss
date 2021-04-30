@@ -1,0 +1,35 @@
+section {
+  .filter {
+    &_list {
+      width: 230px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-right: 10px;
+    }
+    .clear {
+      display: flex;
+      height: 52px;
+      justify-content: space-between;
+      align-items: center;
+      .filter_clear-button{
+        cursor: pointer;
+        color: #686d73;
+        border-bottom: 1px solid #686d73;
+      }
+    }
+
+    &_item {
+      width: 100%;
+      border-bottom: 1px solid #d3d8df;
+      color: #000;
+
+      .mat-expansion-panel {
+        box-shadow: none;
+      }
+
+    }
+  }
+}
