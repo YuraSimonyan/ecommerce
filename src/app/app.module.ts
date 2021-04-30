@@ -11,6 +11,7 @@ import {CommonModule} from '@angular/common';
 import { MainComponent } from './shell/main/main.component';
 import { ProductsGridComponent } from './shell/main/products-grid/products-grid.component';
 import {HttpClientModule} from '@angular/common/http';
+import {AdminModule} from './shell/admin/admin.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
