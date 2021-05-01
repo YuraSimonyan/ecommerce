@@ -28,15 +28,23 @@
       <mat-label>цена</mat-label>
       <input matInput formControlName="price">
     </mat-form-field>
-    <div class="material">
-      <label for="material" class="material-field" *ngIf="!productForm.get('material').value.length">
-        <h5>Выберите материал</h5>
-        <input type="file" id="material"  (change)="onFileSelected($event)" class="materialName">
-      </label>
-      <div class="material-photo" *ngIf="productForm.get('material').value.length">
-          <img src="{{productForm.get('material').value}}" alt="">
+    <hr>
+    <br>
+    <ng-container formGroupName="material">
+      <mat-form-field appearance="fill" class="material-name">
+        <mat-label>Название материала</mat-label>
+        <input matInput formControlName="materialName">
+      </mat-form-field>
+      <div class="material">
+        <label for="material" class="material-field" *ngIf="!productForm.get('material').get('materialPhoto').value.length">
+          <h5>Выберите материал</h5>
+          <input type="file" id="material"  (change)="onFileSelected($event)" class="materialImg">
+        </label>
+        <div class="material-photo" *ngIf="productForm.get('material').get('materialPhoto').value.length">
+          <img src="{{productForm.get('material').get('materialPhoto').value}}" alt="">
+        </div>
       </div>
-    </div>
+    </ng-container>
     <div class="photos">
       <div class="photos-field">
         Добавить фото продукта

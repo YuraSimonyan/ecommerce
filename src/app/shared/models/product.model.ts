@@ -6,7 +6,7 @@ export class ProductModel {
               public description: string,
               public style: string,
               public price: string,
-              public material: string,
+              public material: {materialName: string, materialPhoto: [string]},
               public img: string[]) {
   }
 }

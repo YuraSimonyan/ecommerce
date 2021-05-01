@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ProductModel} from '../../../../shared/models/product.model';
+import {AddProductService} from '../../../../shared/services/add-product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -13,7 +15,7 @@ export class AddProductComponent implements OnInit {
     'майки', 'кардиганы', 'лосины', 'шорты', 'комбенизоны',
     'халаты', 'блузки', 'юбки', 'жилетки', 'спецодежда', 'сумки'];
 
-  constructor() {
+  constructor(private addProductService: AddProductService) {
   }
 
   ngOnInit(): void {
@@ -22,13 +24,23 @@ export class AddProductComponent implements OnInit {
       description: new FormControl('', Validators.required),
       style: new FormControl('', Validators.required),
       price: new FormControl('', Validators.required),
-      material: new FormArray([], Validators.required),
+      material: new FormGroup({
+        materialName: new FormControl(),
+        materialPhoto: new FormArray([], Validators.required),
+      }),
       photos: new FormArray([])
     });
   }
 
   addProduct(): void {
-    console.log(this.productForm.value);
+    this.addProductService.addValueDataBase(new ProductModel(
+      this.productForm.get('title').value,
+      this.productForm.get('description').value,
+      this.productForm.get('style').value,
+      this.productForm.get('price').value,
+      this.productForm.get('material').value,
+      this.productForm.get('photos').value,
+    )).subscribe(value => console.log(value));
   }
 
   onFileSelected(event): void {
@@ -37,8 +49,8 @@ export class AddProductComponent implements OnInit {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        if (event.target.classList.contains('materialName')) {
-          const arrayMaterial = this.productForm.controls.material as FormArray;
+        if (event.target.classList.contains('materialImg')) {
+          const arrayMaterial = this.productForm.get('material').get('materialPhoto') as FormArray;
           arrayMaterial.push(new FormControl(reader.result));
         }
         if (event.target.classList.contains('photoName')) {
