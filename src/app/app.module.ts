@@ -12,6 +12,7 @@ import { MainComponent } from './shell/main/main.component';
 import { ProductsGridComponent } from './shell/main/products-grid/products-grid.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AdminModule} from './shell/admin/admin.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AdminModule} from './shell/admin/admin.module';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
-    AdminModule
+    AdminModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,8 +6,7 @@ export class ProductModel {
               public description: string,
               public style: string,
               public price: string,
-              public size: string,
-              public color: string,
+              public material: string,
               public img: string[]) {
   }
 }

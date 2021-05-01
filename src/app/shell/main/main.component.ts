@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {ProductService} from '../../shared/services/product.service';
+import {Component, OnInit} from '@angular/core';
 import {AddProductService} from '../../shared/services/add-product.service';
 import {GetProductService} from '../../shared/services/get-product.service';
 
@@ -10,11 +9,12 @@ import {GetProductService} from '../../shared/services/get-product.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private addProductService: AddProductService, private getProductService: GetProductService) { }
+  constructor(private addProductService: AddProductService, private getProductService: GetProductService) {
+  }
 
   ngOnInit(): void {
-    this.addProductService.addValue();
-    this.getProductService.getProduct();
+    // this.addProductService.addValue();
+    // this.getProductService.getProduct();
   }
 
 }
