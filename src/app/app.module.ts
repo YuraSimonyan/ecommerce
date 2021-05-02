@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
-import { FilterComponent } from './shell/filter/filter.component';
+import { FilterComponent } from './shell/main/filter/filter.component';
 import {CommonModule} from '@angular/common';
 import { MainComponent } from './shell/main/main.component';
 import { ProductsGridComponent } from './shell/main/products-grid/products-grid.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AdminModule} from './shell/admin/admin.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ProductDetailComponent } from './shell/main/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     FilterComponent,
     MainComponent,
     ProductsGridComponent,
+    ProductDetailComponent,
 
   ],
   imports: [

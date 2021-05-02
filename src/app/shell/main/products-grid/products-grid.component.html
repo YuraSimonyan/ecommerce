@@ -6,7 +6,7 @@
         <mat-card-content>
           <div class="product-name">{{product.title}}</div>
           <div class="product-price">{{product.price}}$</div>
-          <div class="product-button" (click)="showDetails()">Перегляд</div>
+          <div class="product-button" (click)="showDetails(product.id)">Перегляд</div>
         </mat-card-content>
       </mat-card>
     </div>

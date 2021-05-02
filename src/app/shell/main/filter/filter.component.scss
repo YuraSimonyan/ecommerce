@@ -1,7 +1,8 @@
 section {
   .filter {
     &_list {
-      width: 230px;
+      width: 100%;
+      max-width: 200px;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -9,12 +10,14 @@ section {
       justify-content: flex-start;
       margin-right: 10px;
     }
+
     .clear {
       display: flex;
       height: 52px;
       justify-content: space-between;
       align-items: center;
-      .filter_clear-button{
+
+      .filter_clear-button {
         cursor: pointer;
         color: #686d73;
         border-bottom: 1px solid #686d73;

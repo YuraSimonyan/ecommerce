@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductModel} from '../../../shared/models/product.model';
 import {GetProductService} from '../../../shared/services/get-product.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-products-grid',
@@ -10,7 +11,7 @@ import {GetProductService} from '../../../shared/services/get-product.service';
 export class ProductsGridComponent implements OnInit {
   products = [];
 
-  constructor(private getProductService: GetProductService) {
+  constructor(private getProductService: GetProductService, private route: Router, private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -23,7 +24,7 @@ export class ProductsGridComponent implements OnInit {
     });
   }
 
-  showDetails() {
-
+  showDetails(id): void {
+    this.route.navigate(['details', id]);
   }
 }

@@ -1,14 +1,30 @@
 * {
   box-sizing: border-box;
-
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-
-    &_title {
-      font-size: 28px;
-      font-weight: 500;
-      font-family: Arimo, Helvetica Neue, Arial, sans-serif;
-    }
+}
+section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .filter{
+    width: 100%;
+    max-width: 200px;
+  }
+  .main{
+    margin: 20px 30px 0 100px;
+    width: 100%;
+    max-width: 1200px;
   }
 }
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+
+  &_title {
+    font-size: 28px;
+    font-weight: 500;
+    font-family: Arimo, Helvetica Neue, Arial, sans-serif;
+  }
+}
+
+
