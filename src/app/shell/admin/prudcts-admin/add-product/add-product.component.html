@@ -17,7 +17,7 @@
       <mat-label>Стиль</mat-label>
       <mat-select formControlName="style">
         <ng-container *ngFor="let item of styleList">
-          <mat-option value="item">
+          <mat-option value="{{item}}">
             {{item}}
           </mat-option>
         </ng-container>

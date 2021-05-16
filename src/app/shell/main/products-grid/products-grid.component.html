@@ -1,14 +1,12 @@
 <section>
   <div class="product-loop">
-    <div class="product-loop_item" *ngFor="let product of products">
-      <mat-card class="example-card">
-        <img mat-card-image src="{{product.img[0]}}">
-        <mat-card-content>
-          <div class="product-name">{{product.title}}</div>
-          <div class="product-price">{{product.price}}$</div>
-          <div class="product-button" (click)="showDetails(product.id)">Перегляд</div>
-        </mat-card-content>
-      </mat-card>
+    <div class="product-item" *ngFor="let product of ($products | async)">
+      <div class="product-item__image">
+        <img src="{{product.img[0]}}" class="product-item__image">
+      </div>
+      <div class="product-item__name">{{product.title}}</div>
+      <div class="product-item__price">{{product.price}}</div>
+      <div class="product-item__button" (click)="showDetails(product.id)">Детальніше</div>
     </div>
   </div>
 </section>

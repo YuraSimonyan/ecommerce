@@ -1,0 +1,147 @@
+* {
+  font-family: 'Arimo', sans-serif;
+}
+
+section {
+  width: 100%;
+  max-width: 1170px;
+  margin-top: 30px;
+  margin-left: 160px;
+  display: flex;
+  justify-content: space-around;
+
+
+  .slider {
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &-item {
+
+        margin-top: 20px;
+        width: 100px;
+        height: 130px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .main-slider {
+      width: 510px;
+      height: 670px;
+      margin-left: 40px;
+
+      &__image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 370px;
+
+    &__header {
+      color: #4f4f4f;
+      font-size: 32px;
+    }
+
+    &__price {
+      margin-top: 18px;
+      font-weight: bold;
+      font-size: 19px;
+      color: #4f4f4f;
+    }
+
+    &__material {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      &-name {
+        font-size: 24px;
+      }
+
+      &-image {
+        margin: 10px auto;
+        align-items: center;
+        width: 250px;
+        height: 250px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &__size {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+
+      &-button {
+        font-weight: bold;
+        font-family: 'Arimo', sans-serif;
+        text-align: center;
+        width: 100%;
+        height: 50px;
+        max-width: 300px;
+        background: black;
+        border: 1px solid black;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      &-button:hover {
+        transition: all 0.5s;
+        background: white;
+        color: black;
+
+      }
+
+    }
+
+    &__divider {
+      margin: 40px 0;
+
+    }
+
+    &__description {
+      &-header {
+        font-size: 1rem;
+        line-height: 1.1rem;
+        color: #000;
+        font-family: inherit;
+      }
+
+      &-text {
+        margin-top: 30px;
+        font-size: 0.9rem;
+        color: #000;
+      }
+    }
+
+    &__phone {
+      margin-top: 20px;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+}

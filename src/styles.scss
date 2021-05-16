@@ -1,4 +1,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Arimo&display=swap");
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Arimo', sans-serif;}
+html, body {
+  max-width: 1500px;
+  height: 100%;
+}
+* { margin: 0; font-family: 'Arimo', sans-serif;}
+

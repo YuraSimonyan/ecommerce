@@ -6,6 +6,7 @@
 
 header {
   width: 100%;
+  max-width: 1500px;
   height: 80px;
   background: #fff;
 
@@ -23,15 +24,21 @@ header {
       font-weight: bold;
     }
 
-    &_item {
+    &__item {
 
     }
 
-    &_link {
+    &__link {
       font-size: 14px;
       text-decoration: none;
       color: #000;
       text-transform: uppercase;
     }
+
+    &__link:hover {
+      color: #e14419;;
+    }
+
+
   }
 }

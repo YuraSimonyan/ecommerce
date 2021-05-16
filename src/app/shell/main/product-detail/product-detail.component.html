@@ -1,8 +1,45 @@
-<section>
-  <div class="product-info">
-    <div class="product-info-slider">
-
+<mat-progress-bar *ngIf="!showPage" mode="indeterminate"></mat-progress-bar>
+<section *ngIf="showPage">
+  <div class="slider">
+    <div class="slider__list">
+      <ng-container *ngFor="let img of (productData | async)?.img; let i = index">
+        <div class="slider__list-item">
+          <img src="{{img}}" (click)="onChangeImg($event)">
+        </div>
+      </ng-container>
     </div>
-    <div class="product-info-data"></div>
+    <div class="main-slider" #mainImage>
+      <ng-container *ngFor="let img of (productData | async)?.img; let i = index">
+        <img class="main-slider__image" *ngIf="i === 0" src="{{img}}" alt="main image">
+      </ng-container>
+    </div>
+  </div>
+  <div class="info">
+    <div class="info__header">
+      {{(productData | async)?.title }}
+    </div>
+    <div class="info__price">{{(productData | async)?.price}}</div>
+    <div class="info__material">
+      <div class="info__material-name">{{(productData | async)?.material?.materialName}}</div>
+      <div class="info__material-image">
+        <img src="{{(productData | async)?.material?.materialPhoto}}" alt="">
+      </div>
+    </div>
+    <div class="info__size">
+      <button class="info__size-button">ПІДИБРАТІ РОЗМІР</button>
+    </div>
+    <div class="info__divider">
+      <mat-divider></mat-divider>
+    </div>
+    <div class="info__description">
+      <div class="info__description-header">ДЕТАЛІ</div>
+      <p class="info__description-text">{{(productData | async)?.description}}</p>
+    </div>
+    <div class="info__phone">
+      <a href="tel:+380633453766" id="phone">
+        +38-063-345-37-66
+        <p>Для замовлення та уточнення деталей</p>
+      </a>
+    </div>
   </div>
 </section>

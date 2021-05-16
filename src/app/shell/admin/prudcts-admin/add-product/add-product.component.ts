@@ -37,10 +37,10 @@ export class AddProductComponent implements OnInit {
       this.productForm.get('title').value,
       this.productForm.get('description').value,
       this.productForm.get('style').value,
-      this.productForm.get('price').value,
+      '₴' + this.productForm.get('price').value,
       this.productForm.get('material').value,
       this.productForm.get('photos').value,
-    )).subscribe(value => console.log(value));
+    )).subscribe();
   }
 
   onFileSelected(event): void {

@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AddProductService} from '../../shared/services/add-product.service';
-import {GetProductService} from '../../shared/services/get-product.service';
 
 @Component({
   selector: 'app-main',
@@ -9,12 +7,10 @@ import {GetProductService} from '../../shared/services/get-product.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private addProductService: AddProductService, private getProductService: GetProductService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    // this.addProductService.addValue();
-    // this.getProductService.getProduct();
   }
 
 }

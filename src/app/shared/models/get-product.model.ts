@@ -4,7 +4,5 @@ export class GetProductModel {
   description: string;
   style: string;
   price: string;
-  size: string;
-  color: string;
   img: string[];
 }

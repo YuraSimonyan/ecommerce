@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductModel} from '../../../shared/models/product.model';
 import {GetProductService} from '../../../shared/services/get-product.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {Select, Store} from '@ngxs/store';
+import {ProductState} from '../../../shared/store/product.state';
+import {GetProductsAction} from '../../../shared/store/product.action';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-products-grid',
@@ -9,19 +12,19 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./products-grid.component.scss']
 })
 export class ProductsGridComponent implements OnInit {
-  products = [];
 
-  constructor(private getProductService: GetProductService, private route: Router, private router: ActivatedRoute) {
+  constructor(
+    private getProductService: GetProductService,
+    private route: Router,
+    private store: Store
+  ) {
   }
 
+  @Select(ProductState.productData)
+  $products: Observable<any>;
+
   ngOnInit(): void {
-    this.getProductService.getProduct().subscribe(value => {
-      for (const key in value) {
-        value[key].id = key;
-        this.products.push(value[key]);
-        console.log(this.products);
-      }
-    });
+    this.store.dispatch(new GetProductsAction());
   }
 
   showDetails(id): void {

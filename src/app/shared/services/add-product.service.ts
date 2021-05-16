@@ -11,7 +11,7 @@ export class AddProductService {
 
   addValueDataBase(value: ProductModel): Observable<any> {
 
-    return this.http.post('https://forward-rarity-302511-default-rtdb.firebaseio.com/products.json', value);
+    return this.http.post('https://pasha-e-default-rtdb.firebaseio.com/products.json', value);
 
   }
 }
