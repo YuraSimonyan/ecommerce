@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {ProductService} from './product.service';
 import {ProductModel} from '../models/product.model';
 import {Observable} from 'rxjs';
@@ -11,7 +11,7 @@ export class AddProductService {
 
   addValueDataBase(value: ProductModel): Observable<any> {
 
-    return this.http.post('https://pasha-e-default-rtdb.firebaseio.com/products.json', value);
+    return this.http.post('https://pash1-70445-default-rtdb.firebaseio.com/products.json', value);
 
   }
 }

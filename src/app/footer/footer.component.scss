@@ -12,6 +12,7 @@ section {
 
     &__item {
       padding: 0 12px;
+
       a {
         text-decoration: none;
         font-size: 0.9rem;
@@ -30,7 +31,8 @@ section {
       display: flex;
       list-style: none;
     }
-    &__item{
+
+    &__item {
       padding: 0 8px;
     }
   }

@@ -3,15 +3,19 @@
   <div class="slider">
     <div class="slider__list">
       <ng-container *ngFor="let img of (productData | async)?.img; let i = index">
-        <div class="slider__list-item">
-          <img src="{{img}}" (click)="onChangeImg($event)">
+        <div class="slider__list-item" (click)="onChangeImg($event, i)">
+          <img src="{{img}}">
         </div>
       </ng-container>
     </div>
-    <div class="main-slider" #mainImage>
-      <ng-container *ngFor="let img of (productData | async)?.img; let i = index">
-        <img class="main-slider__image" *ngIf="i === 0" src="{{img}}" alt="main image">
-      </ng-container>
+    <div class="main-slider">
+      <div class="main-slider__icon-forward" (click)="nextMainImg()">
+        <mat-icon>arrow_forward</mat-icon>
+      </div>
+      <div class="main-slider__icon-back" (click)="backMainImg()">
+        <mat-icon>arrow_back</mat-icon>
+      </div>
+      <img class="main-slider__image" src="{{(productData | async)?.img[mainPageNum]}}" alt="main image">
     </div>
   </div>
   <div class="info">
