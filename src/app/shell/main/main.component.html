@@ -4,23 +4,13 @@
   </div>
   <div class="main">
     <div class="top-bar">
-      <div class="top-bar_title">New Arrivals</div>
       <div class="top-bar_sort">
-        <mat-form-field appearance="fill">
-          <mat-label>Sort By</mat-label>
-          <mat-select>
-            <mat-option>
-              Featured
-            </mat-option>
-            <mat-option>
-              Price: Low to High
-            </mat-option>
-            <mat-option>
-              Price: High to Low
-            </mat-option>
-            <mat-option>
-              A-Z
-            </mat-option>
+        <mat-form-field>
+          <mat-select placeholder="Сортувати по ціні">
+            <mat-select-trigger>
+            </mat-select-trigger>
+            <mat-option (click)="sortHigh()">За зростанням ціни</mat-option>
+            <mat-option (click)="sortLow()">За Зменшенням ціни</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

@@ -1,6 +1,6 @@
 <section>
   <div class="product-loop">
-    <div class="product-item" *ngFor="let product of ($products | async)">
+    <div class="product-item" *ngFor="let product of listProducts">
       <div class="product-item__image">
         <img src="{{product.img[0]}}" class="product-item__image">
       </div>

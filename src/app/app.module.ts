@@ -10,7 +10,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxsModule} from '@ngxs/store';
 
 import {SharedModule} from './shared/shared.module';
@@ -44,6 +44,7 @@ import { FooterComponent } from './footer/footer.component';
     SharedModule,
     HttpClientModule,
     AdminModule,
+    FormsModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([ProductState]),
     NgxsReduxDevtoolsPluginModule.forRoot({

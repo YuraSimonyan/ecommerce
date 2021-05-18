@@ -10,10 +10,10 @@ import {AddProductService} from '../../../../shared/services/add-product.service
 })
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;
-  styleList = ['Штаны', 'платья', 'спортивная одежда',
-    'куртки', 'пальта', 'шубы', 'постельное', 'футболки',
-    'майки', 'кардиганы', 'лосины', 'шорты', 'комбенизоны',
-    'халаты', 'блузки', 'юбки', 'жилетки', 'спецодежда', 'сумки'];
+  styleList = ['Плаття', 'Штани', 'Спортивний одяг',
+    'Куртки', 'Пальта', 'Футболки',
+    'Майки', 'кардигани', 'шорти', 'комбенізони',
+    'Халати', 'блузки', 'спідниці', 'жилетки', 'спецодяг', 'сумки'];
 
   constructor(private addProductService: AddProductService) {
   }
@@ -57,7 +57,6 @@ export class AddProductComponent implements OnInit {
           const arrayPhotos = this.productForm.controls.photos as FormArray;
           arrayPhotos.push(new FormControl(reader.result));
         }
-
       };
     }
   }
