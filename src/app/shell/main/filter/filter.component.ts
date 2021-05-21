@@ -34,13 +34,16 @@ export class FilterComponent implements OnInit {
   }
 
   clearFilter(): void {
+    this.filterService.fetchProducts.next();
     for (const item in this.appliedFilters) {
       if (typeof this.appliedFilters[item] === 'object') {
         for (const subItem in this.appliedFilters[item]) {
+          console.log(this.appliedFilters[item]);
           this.appliedFilters[item][subItem] = '';
         }
+      } else {
+        this.appliedFilters[item] = '';
       }
-      this.appliedFilters[item] = '';
     }
   }
 

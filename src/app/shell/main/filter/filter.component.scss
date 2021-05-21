@@ -25,15 +25,20 @@ section {
     }
 
     &_item {
+      cursor: pointer;
       width: 100%;
       border-bottom: 1px solid #d3d8df;
       color: #000;
+      mat-list-item:hover{
+        background: ghostwhite;
+      }
 
       .mat-expansion-panel {
         box-shadow: none;
       }
     }
-    .filter_item-price{
+
+    .filter_item-price {
 
     }
   }

@@ -28,6 +28,10 @@ export class ProductsGridComponent implements OnInit {
   $products: Observable<any>;
 
   ngOnInit(): void {
+    this.filterService.fetchProducts.subscribe(() => {
+        this.$products.subscribe(value => this.listProducts = value);
+      }
+    );
     this.$products.subscribe((value) => {
       this.listProducts = value;
     });

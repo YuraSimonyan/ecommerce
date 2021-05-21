@@ -3,7 +3,7 @@
     <ul class="filter_list">
       <li class="filter_item clear">
         ФІЛЬТР
-        <div class="filter_clear-button" (click)="clearFilter()">clear all</div>
+        <div class="filter_clear-button" (click)="clearFilter()">Очистити</div>
       </li>
       <li class="filter_item" style="padding: 10px 0"
           *ngIf="appliedFilters.style || appliedFilters.price.min || appliedFilters.price.max;">
@@ -36,11 +36,11 @@
           </mat-expansion-panel-header>
           <mat-form-field>
             <mat-label>Від</mat-label>
-            <input matInput type="number" [(ngModel)]="appliedFilters.price.min">
+            <input matInput type="number" [(ngModel)]="appliedFilters?.price.min">
           </mat-form-field>
           <mat-form-field>
             <mat-label>До</mat-label>
-            <input matInput type="number" [(ngModel)]="appliedFilters.price.max">
+            <input matInput type="number" [(ngModel)]="appliedFilters?.price.max">
           </mat-form-field>
         </mat-expansion-panel>
       </li>

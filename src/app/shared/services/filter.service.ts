@@ -5,4 +5,5 @@ import {Subject} from 'rxjs';
 export class FilterService {
   filterState = new Subject();
   sortState = new Subject();
+  fetchProducts = new Subject();
 }
