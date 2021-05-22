@@ -22,13 +22,9 @@ header {
     .logo {
       font-size: 27px;
       font-weight: bold;
-    }
-  //  li.['logo']{
-  //  colro: black;
-  //}
-
-    &__item {
-
+      text-transform: uppercase;
+      text-decoration: none;
+      color: black;
     }
 
     &__link {
@@ -40,6 +36,15 @@ header {
 
     &__link:hover {
       color: #e14419;;
+    }
+
+    &__phone {
+      text-decoration: none;
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.8);
+      transition: all 0.3s;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     }
 
 

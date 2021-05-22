@@ -5,6 +5,10 @@ section {
   padding: 24px 10px;
 
   .footer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     &__list {
       display: flex;
       list-style: none;
@@ -15,15 +19,17 @@ section {
 
       a {
         text-decoration: none;
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: #4f4f4f;
       }
     }
   }
 
   .footer-label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #4f4f4f;
+    display: flex;
+    align-items: center;
   }
 
   .footer-social {

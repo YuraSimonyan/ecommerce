@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProductModel} from '../../../../shared/models/product.model';
 import {AddProductService} from '../../../../shared/services/add-product.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-add-product',
@@ -15,7 +16,7 @@ export class AddProductComponent implements OnInit {
     'Майки', 'кардигани', 'шорти', 'комбенізони',
     'Халати', 'блузки', 'спідниці', 'жилетки', 'спецодяг', 'сумки'];
 
-  constructor(private addProductService: AddProductService) {
+  constructor(private addProductService: AddProductService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -38,8 +39,11 @@ export class AddProductComponent implements OnInit {
       this.productForm.get('description').value,
       this.productForm.get('style').value,
       '₴' + this.productForm.get('price').value,
+      false,
+      '',
+      this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
       this.productForm.get('material').value,
-      this.productForm.get('photos').value,
+      this.productForm.get('photos').value
     )).subscribe();
   }
 

@@ -9,7 +9,7 @@ export class GetProductService {
 
   getProduct(): Observable<any> {
 
-    return this.http.get('https://pash1-70445-default-rtdb.firebaseio.com/products.json');
+    return this.http.get('https://pasha2-fe82f-default-rtdb.firebaseio.com/products.json');
 
   }
 
