@@ -4,8 +4,9 @@ import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [],
- imports: [MaterialModule],
+  imports: [MaterialModule],
   providers: [DatePipe],
   exports: [MaterialModule]
 })
-export class SharedModule{}
+export class SharedModule {
+}

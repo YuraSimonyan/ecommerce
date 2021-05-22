@@ -22,7 +22,7 @@ import {AdminModule} from './shell/admin/admin.module';
 import {ProductDetailComponent} from './shell/main/product-detail/product-detail.component';
 import {environment} from '../environments/environment';
 import {ProductState} from './shared/store/product.state';
-import { FooterComponent } from './footer/footer.component';
+import {FooterComponent} from './footer/footer.component';
 
 
 @NgModule({

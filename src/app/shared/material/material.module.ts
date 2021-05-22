@@ -11,6 +11,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -25,7 +27,10 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatProgressBarModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule,
+    MatSortModule
+
   ],
   exports: [
     MatInputModule,
@@ -39,7 +44,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatProgressBarModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule,
+    MatSortModule
   ],
 
 

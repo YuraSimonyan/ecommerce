@@ -1,8 +1,12 @@
-mat-tab-group{
+section {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  table[mat-table] {
+    width: 50rem;
+
+  }
 }

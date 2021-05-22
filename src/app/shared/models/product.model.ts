@@ -6,7 +6,7 @@ export class ProductModel {
               public price: string,
               public isPromoted: boolean,
               public promotedPrice: string,
-              public data: string,
+              public date: string,
               public material: { materialName: string, materialPhoto: [string] },
               public img: string[]) {
   }
