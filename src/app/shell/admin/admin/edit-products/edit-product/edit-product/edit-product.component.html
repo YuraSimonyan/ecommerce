@@ -2,7 +2,7 @@
   <form class="add-form" [formGroup]="productForm" (submit)="addProduct()" >
     <mat-form-field appearance="fill" class="title">
       <mat-label>Название продукта</mat-label>
-      <input matInput formControlName="title">
+      <input matInput formControlName="title" [value]="product.title">
     </mat-form-field>
     <mat-form-field class="description">
       <mat-label>Описание</mat-label>
@@ -11,12 +11,14 @@
         cdkTextareaAutosize
         cdkAutosizeMinRows="1"
         cdkAutosizeMaxRows="5"
-        formControlName="description"></textarea>
+        formControlName="description"
+        [value]="product.description"
+      ></textarea>
     </mat-form-field>
     <mat-form-field appearance="fill" class="style">
       <mat-label>Стиль</mat-label>
       <mat-select formControlName="style">
-        <ng-container *ngFor="let item of styleList">
+        <ng-container *ngFor="let item of listStyles">
           <mat-option value="{{item}}">
             {{item}}
           </mat-option>
@@ -26,7 +28,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="price">
       <mat-label>цена</mat-label>
-      <input matInput formControlName="price">
+      <input matInput formControlName="price" [value]="product.price">
     </mat-form-field>
     <hr>
     <br>

@@ -16,7 +16,7 @@
     <mat-form-field appearance="fill" class="style">
       <mat-label>Стиль</mat-label>
       <mat-select formControlName="style">
-        <ng-container *ngFor="let item of styleList">
+        <ng-container *ngFor="let item of listStyles">
           <mat-option value="{{item}}">
             {{item}}
           </mat-option>

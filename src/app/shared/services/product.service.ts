@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {GetProductService} from './get-product.service';
+
 
 @Injectable({providedIn: 'root'})
 export class ProductService {
-  products = [
+  styleList = ['Плаття', 'Штани', 'Спортивний одяг',
+    'Куртки', 'Пальта', 'Футболки',
+    'Майки', 'кардигани', 'шорти', 'комбенізони',
+    'Халати', 'блузки', 'спідниці', 'жилетки', 'спецодяг', 'сумки'];
 
-  ];
-
-  constructor(private getProductService: GetProductService) {
+  constructor() {
   }
 
 

@@ -3,6 +3,7 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProductModel} from '../../../../shared/models/product.model';
 import {AddProductService} from '../../../../shared/services/add-product.service';
 import {DatePipe} from '@angular/common';
+import {ProductService} from '../../../../shared/services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -11,12 +12,9 @@ import {DatePipe} from '@angular/common';
 })
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;
-  styleList = ['Плаття', 'Штани', 'Спортивний одяг',
-    'Куртки', 'Пальта', 'Футболки',
-    'Майки', 'кардигани', 'шорти', 'комбенізони',
-    'Халати', 'блузки', 'спідниці', 'жилетки', 'спецодяг', 'сумки'];
+  listStyles = this.productService.styleList;
 
-  constructor(private addProductService: AddProductService, private datePipe: DatePipe) {
+  constructor(private addProductService: AddProductService, private datePipe: DatePipe, private productService: ProductService) {
   }
 
   ngOnInit(): void {
