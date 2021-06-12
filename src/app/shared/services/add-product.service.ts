@@ -10,7 +10,6 @@ export class AddProductService {
   }
 
   addValueDataBase(value: ProductModel): Observable<any> {
-
     return this.http.post('https://pasha2-fe82f-default-rtdb.firebaseio.com/products.json', value);
 
   }

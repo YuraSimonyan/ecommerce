@@ -1,8 +1,12 @@
 <section>
-  <form class="add-form" [formGroup]="productForm" (submit)="addProduct()" >
+  <form class="add-form" [formGroup]="productForm" (submit)="editProduct()">
     <mat-form-field appearance="fill" class="title">
       <mat-label>Название продукта</mat-label>
-      <input matInput formControlName="title" [value]="product.title">
+      <input
+        matInput
+        formControlName="title"
+        [value]="product.title"
+      >
     </mat-form-field>
     <mat-form-field class="description">
       <mat-label>Описание</mat-label>
@@ -12,54 +16,82 @@
         cdkAutosizeMinRows="1"
         cdkAutosizeMaxRows="5"
         formControlName="description"
-        [value]="product.description"
+        value="{{product.description}}"
       ></textarea>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="style">
+    <mat-form-field
+      appearance="fill"
+      class="style"
+    >
       <mat-label>Стиль</mat-label>
-      <mat-select formControlName="style">
+      <mat-select
+        formControlName="style"
+        value="{{product.style}}"
+      >
         <ng-container *ngFor="let item of listStyles">
           <mat-option value="{{item}}">
             {{item}}
           </mat-option>
         </ng-container>
-
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill" class="price">
       <mat-label>цена</mat-label>
-      <input matInput formControlName="price" [value]="product.price">
+      <input
+        matInput
+        formControlName="price"
+        [value]="product.price"
+      >
     </mat-form-field>
-    <hr>
-    <br>
+    <mat-slide-toggle #promo>Добавить акцию</mat-slide-toggle>
+    <mat-form-field appearance="fill" class="price" *ngIf="promo.checked">
+      <mat-label>Акционная ценна</mat-label>
+      <input
+        matInput
+        formControlName="promotedPrice"
+        [value]="product.promotedPrice"
+      >
+    </mat-form-field>
     <ng-container formGroupName="material">
       <mat-form-field appearance="fill" class="material-name">
         <mat-label>Название материала</mat-label>
-        <input matInput formControlName="materialName">
+        <input matInput formControlName="materialName" value="{{product.style}}">
       </mat-form-field>
       <div class="material">
-        <label for="material" class="material-field" *ngIf="!productForm.get('material').get('materialPhoto').value.length">
-          <h5>Выберите материал</h5>
-          <input type="file" id="material"  (change)="onFileSelected($event)" class="materialImg">
+        <mat-divider></mat-divider>
+        <label for="material" class="material-field"
+               *ngIf="productForm.get('material').get('materialPhoto').value">
+          <h5>Изменить фото материала <mat-icon>upload_file</mat-icon></h5>
+          <input type="file" id="material" (change)="onFileSelected($event)" class="materialImg">
         </label>
-        <div class="material-photo" *ngIf="productForm.get('material').get('materialPhoto').value.length">
+        <div
+          class="material-photo"
+          *ngIf="productForm.get('material').get('materialPhoto').value"
+        >
           <img src="{{productForm.get('material').get('materialPhoto').value}}" alt="">
         </div>
       </div>
     </ng-container>
     <div class="photos">
+      <mat-divider></mat-divider>
       <div class="photos-field">
-        Добавить фото продукта
+        Удалить или добавить новое фото
         <label for="photos">
-          <span class="material-icons-outlined">
-            upload_file
-          </span>
-          <input type="file" id="photos" (change)="onFileSelected($event)" class="photoName">
+          <mat-icon>upload_file</mat-icon>
+          <input
+            type="file"
+            id="photos"
+            (change)="onFileSelected($event)"
+            class="photoName"
+          >
         </label>
       </div>
       <div class="" *ngIf="productForm.get('photos').value.length">
-        <ng-container *ngFor="let item of productForm.get('photos').value">
+        <ng-container *ngFor="let item of productForm.get('photos').value; let i = index;">
           <div class="photos-list">
+            <div class="delete-icon" (click)="removePhoto(i)">
+              <mat-icon>delete</mat-icon>
+            </div>
             <img src="{{item}}" alt="">
           </div>
 

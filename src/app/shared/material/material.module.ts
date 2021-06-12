@@ -13,6 +13,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatListModule,
     MatChipsModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule
 
   ],
   exports: [
@@ -46,7 +48,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatListModule,
     MatChipsModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule
   ],
 
 
