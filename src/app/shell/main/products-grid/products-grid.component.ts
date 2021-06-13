@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {GetProductService} from '../../../shared/services/get-product.service';
 import {Router} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
 import {ProductState} from '../../../shared/store/product.state';
 import {GetProductsAction} from '../../../shared/store/product.action';
 import {Observable} from 'rxjs';
 import {FilterService} from '../../../shared/services/filter.service';
+import {ProductService} from '../../../shared/services/product.service';
 
 @Component({
   selector: 'app-products-grid',
@@ -13,11 +13,11 @@ import {FilterService} from '../../../shared/services/filter.service';
   styleUrls: ['./products-grid.component.scss']
 })
 export class ProductsGridComponent implements OnInit {
-  listProducts;
-  filterValue;
+  public listProducts;
+  public filterValue;
 
   constructor(
-    private getProductService: GetProductService,
+    private productService: ProductService,
     private filterService: FilterService,
     private route: Router,
     private store: Store

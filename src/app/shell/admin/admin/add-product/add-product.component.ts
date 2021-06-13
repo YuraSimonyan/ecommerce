@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProductModel} from '../../../../shared/models/product.model';
-import {AddProductService} from '../../../../shared/services/add-product.service';
 import {DatePipe} from '@angular/common';
 import {ProductService} from '../../../../shared/services/product.service';
 
@@ -14,7 +13,7 @@ export class AddProductComponent implements OnInit {
   productForm: FormGroup;
   listStyles = this.productService.styleList;
 
-  constructor(private addProductService: AddProductService, private datePipe: DatePipe, private productService: ProductService) {
+  constructor(private datePipe: DatePipe, private productService: ProductService) {
   }
 
   ngOnInit(): void {
@@ -32,13 +31,13 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.addProductService.addValueDataBase(new ProductModel(
+    this.productService.addValueDataBase(new ProductModel(
       this.productForm.get('title').value,
       this.productForm.get('description').value,
       this.productForm.get('style').value,
-      '₴' + this.productForm.get('price').value,
+      this.productForm.get('price').value,
       false,
-      '',
+      null,
       this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
       this.productForm.get('material').value,
       this.productForm.get('photos').value

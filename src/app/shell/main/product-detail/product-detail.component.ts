@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {GetProductsActionById} from '../../../shared/store/product.action';
 import {ProductState} from '../../../shared/store/product.state';
+import {MatDialog} from '@angular/material/dialog';
+import {ModalComponent} from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,7 +22,8 @@ export class ProductDetailComponent implements OnInit {
 
 
   constructor(private router: ActivatedRoute,
-              private store: Store) {
+              private store: Store,
+              private dialog: MatDialog) {
   }
 
 
@@ -51,5 +54,9 @@ export class ProductDetailComponent implements OnInit {
     if (this.mainPageNum < 0) {
       this.mainPageNum = this.imgLength - 1;
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent);
   }
 }

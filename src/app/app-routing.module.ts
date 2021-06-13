@@ -4,12 +4,14 @@ import {MainComponent} from './shell/main/main.component';
 import {AdminPageComponent} from './shell/admin/admin/admin-page.component';
 import {ProductDetailComponent} from './shell/main/product-detail/product-detail.component';
 import {EditProductComponent} from './shell/admin/admin/edit-products/edit-product/edit-product/edit-product.component';
+import {ServicesComponent} from './shell/main/services/services.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'admin', component: AdminPageComponent},
   {path: 'admin/edit-product/:id', component: EditProductComponent},
   {path: 'details/:id', component: ProductDetailComponent},
+  {path: 'services', component: ServicesComponent},
   {path: '**', component: MainComponent},
 ];
 

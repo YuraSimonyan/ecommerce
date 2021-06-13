@@ -5,8 +5,8 @@
         <img src="{{product.img[0]}}" class="product-item__image">
       </div>
       <div class="product-item__name">{{product.title}}</div>
-      <div [ngClass]="{outline: product.isPromoted}" class="product-item__price">{{product.price}}</div>
-      <div *ngIf="product.isPromoted" class="product-item__price highlighted" style="color: red;">{{product.promotedPrice}}</div>
+      <div [ngClass]="{outline: product.isPromoted}" class="product-item__price">₴{{product.price}}</div>
+      <div *ngIf="product.isPromoted" class="product-item__price highlighted" style="color: red;">₴{{product.promotedPrice}}</div>
       <div class="product-item__button" (click)="showDetails(product.id)">Детальніше</div>
     </div>
   </div>

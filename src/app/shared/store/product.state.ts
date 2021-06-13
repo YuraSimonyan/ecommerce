@@ -2,8 +2,8 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {ProductModel} from '../models/product.model';
 import {GetProductsAction, GetProductsActionById} from './product.action';
-import {GetProductService} from '../services/get-product.service';
 import {map} from 'rxjs/operators';
+import {ProductService} from '../services/product.service';
 
 export interface ProductStateModel {
   productData: ProductModel[];
@@ -19,13 +19,14 @@ export interface ProductStateModel {
 })
 @Injectable()
 export class ProductState {
-  constructor(private getProductService: GetProductService) {
+  constructor(private productService: ProductService) {
   }
 
   @Selector()
   static productData(state: ProductStateModel): ProductModel[] {
     return state.productData;
   }
+
   @Selector()
   static productItem(state: ProductStateModel): ProductModel[] {
     return state.productItem;
@@ -33,7 +34,7 @@ export class ProductState {
 
   @Action(GetProductsAction)
   GetProductsAction({patchState}: StateContext<ProductStateModel>): void {
-    this.getProductService.getProduct().pipe(map(((value: ProductModel[]) => {
+    this.productService.getProduct().pipe(map(((value: ProductModel[]) => {
       const productArr = [];
       for (const key in value) {
         value[key]['id'] = key;
@@ -44,11 +45,12 @@ export class ProductState {
       patchState({productData: value});
     });
   }
+
   @Action(GetProductsActionById)
   GetProductsActionById(
-                        {patchState}: StateContext<ProductStateModel>,
-                        {id}: GetProductsActionById): void{
-    this.getProductService.getProduct().subscribe(value => {
+    {patchState}: StateContext<ProductStateModel>,
+    {id}: GetProductsActionById): void {
+    this.productService.getProduct().subscribe(value => {
       patchState({productItem: value[id]});
     });
   }

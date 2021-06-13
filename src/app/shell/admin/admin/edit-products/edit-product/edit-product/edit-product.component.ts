@@ -8,7 +8,6 @@ import {ProductModel} from '../../../../../../shared/models/product.model';
 import {ProductService} from '../../../../../../shared/services/product.service';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {EditProductService} from '../../../../../../shared/services/edit-product.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -31,7 +30,6 @@ export class EditProductComponent implements OnInit {
     private store: Store,
     private productService: ProductService,
     private datePipe: DatePipe,
-    private editProductService: EditProductService
   ) {
   }
 
@@ -51,11 +49,16 @@ export class EditProductComponent implements OnInit {
     this.productId = this.route.snapshot.params['id'];
     this.store.dispatch(new GetProductsActionById(this.productId));
     this.$productData.subscribe((value: ProductModel) => {
-        this.product = value;
-        this.productForm.get('material').get('materialPhoto').setValue(this.product?.material?.materialPhoto);
+        this.productForm.get('title').setValue(value.title);
+        this.productForm.get('description').setValue(value.description);
+        this.productForm.get('style').setValue(value.style);
+        this.productForm.get('price').setValue(value.price);
+        this.productForm.get('promotedPrice').setValue(value.promotedPrice);
+        this.productForm.get('material').get('materialName').setValue(value.material?.materialName);
+        this.productForm.get('material').get('materialPhoto').setValue(value.material?.materialPhoto);
         const arrayPhotos = this.productForm.get('photos') as FormArray;
-        if (this.product.img) {
-          for (const photo of this.product.img) {
+        if (value.img) {
+          for (const photo of value.img) {
             arrayPhotos.push(new FormControl(photo));
           }
         }
@@ -65,17 +68,19 @@ export class EditProductComponent implements OnInit {
   }
 
   editProduct(): void {
+    console.log(this.productForm);
     const editedProduct = new ProductModel(
-      this.productForm.get('title').value,
-      this.productForm.get('description').value,
-      this.productForm.get('style').value,
-      '₴' + this.productForm.get('price').value,
-      (!!this.productForm.get('promotedPrice').value),
-      this.productForm.get('promotedPrice').value,
+      this.productForm.controls['title'].value,
+      this.productForm.controls['description'].value,
+      this.productForm.controls['style'].value,
+      this.productForm.controls['price'].value,
+      (!!this.productForm.controls['promotedPrice'].value),
+      this.productForm.controls['promotedPrice'].value,
       this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
-      this.productForm.get('material').value,
-      this.productForm.get('photos').value);
-    this.editProductService.editProduct(editedProduct, this.productId);
+      this.productForm.controls['material'].value,
+      this.productForm.controls['photos'].value);
+    this.productService.editProduct(editedProduct, this.productId);
+    console.log(editedProduct);
   }
 
   onFileSelected(event): void {

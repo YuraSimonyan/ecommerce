@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  .services {
+    margin: 1rem 0.5rem;
+    width: 100%;
+    display: flex;
+    padding: 2rem;
+    justify-content: space-around;
+
+    &__image {
+      width: 45%;
+
+
+      img {
+        width: 100%;
+        height: 70%;
+        box-shadow: 1px 1px 1px #4f4f4f;
+      }
+    }
+
+    &__text {
+      width: 35%;
+      font-size: 1rem;
+      font-family: 'Arimo', sans-serif;
+      line-height: 1.6em;
+      letter-spacing: .04em;
+    }
+
+  }
+
+}

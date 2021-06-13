@@ -22,7 +22,7 @@
     <div class="info__header">
       {{(productData | async)?.title }}
     </div>
-    <div class="info__price">{{(productData | async)?.price}}</div>
+    <div class="info__price">₴{{(productData | async)?.price}}</div>
     <div class="info__material">
       <div class="info__material-name">{{(productData | async)?.material?.materialName}}</div>
       <div class="info__material-image">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="info__size">
-      <button class="info__size-button">ПІДИБРАТІ РОЗМІР</button>
+      <button class="info__size-button" type="button" (click)="openDialog()">ПІДИБРАТІ РОЗМІР</button>
     </div>
     <div class="info__divider">
       <mat-divider></mat-divider>

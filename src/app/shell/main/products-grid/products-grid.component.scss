@@ -12,7 +12,7 @@ section {
   .product-item {
     width: 25%;
     max-width: 280px;
-    max-height: 483px;
+    min-height: 483px;
     padding: 30px;
 
     &__image {

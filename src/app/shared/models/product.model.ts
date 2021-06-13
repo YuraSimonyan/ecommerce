@@ -1,13 +1,13 @@
 export class ProductModel {
 
-  constructor(public title: string,
-              public description: string,
-              public style: string,
-              public price: string,
-              public isPromoted: boolean,
-              public promotedPrice: string,
-              public date: string,
-              public material: { materialName: string, materialPhoto: [string] },
-              public img: string[]) {
+  constructor(public title: any,
+              public description: any,
+              public style: any,
+              public price: any,
+              public isPromoted: any,
+              public promotedPrice: any,
+              public date: any,
+              public material: { materialName: any, materialPhoto: [any] },
+              public img: any[]) {
   }
 }

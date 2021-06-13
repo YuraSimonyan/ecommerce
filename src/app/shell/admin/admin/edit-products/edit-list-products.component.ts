@@ -35,7 +35,4 @@ export class EditListProductsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  go(event: MouseEvent) {
-    console.log(event.target);
-  }
 }

@@ -23,6 +23,7 @@ import {ProductDetailComponent} from './shell/main/product-detail/product-detail
 import {environment} from '../environments/environment';
 import {ProductState} from './shared/store/product.state';
 import {FooterComponent} from './footer/footer.component';
+import { ServicesComponent } from './shell/main/services/services.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {FooterComponent} from './footer/footer.component';
     ProductsGridComponent,
     ProductDetailComponent,
     FooterComponent,
+    ServicesComponent,
 
   ],
   imports: [
