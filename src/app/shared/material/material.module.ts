@@ -15,6 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatSortModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
 
   ],
   exports: [
@@ -52,7 +54,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatSortModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
 
 

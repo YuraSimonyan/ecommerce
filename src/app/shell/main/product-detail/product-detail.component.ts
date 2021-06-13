@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
@@ -57,6 +57,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent);
+    this.dialog.open(ModalComponent);
   }
 }

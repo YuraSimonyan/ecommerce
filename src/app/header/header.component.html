@@ -1,9 +1,13 @@
 <header>
   <ul class="navigation">
-    <li class="navigation__item logo"><a class="logo" routerLink="/">ForYou</a></li>
-    <li class="navigation__item"><a class="navigation__link">Пропозиції</a></li>
-    <li class="navigation__item"><a class="navigation__link" [routerLink]="['/services']">Усі послуги</a></li>
-    <li class="navigation__item"><a class="navigation__phone" href="tel:+380633453766">+380 63 345 37 66</a></li>
+    <li class="navigation__item logo"><a class="logo" routerLink="/" [routerLinkActive]=
+      "['active-link']">ForYou</a></li>
+    <li class="navigation__item"><a class="navigation__link" [routerLink]="['/about']" [routerLinkActive]=
+      "['active-link']">Про Нас</a></li>
+    <li class="navigation__item"><a class="navigation__link" [routerLink]="['/services']" [routerLinkActive]=
+      "['active-link']">Усі послуги</a></li>
+    <li class="navigation__item"><a class="navigation__phone" href="tel:+380633453766" [routerLinkActive]=
+      "['active-link']">+380 63 345 37 66</a></li>
     <li class="navigation__item">
       <mat-form-field>
         <mat-icon matSuffix>search</mat-icon>

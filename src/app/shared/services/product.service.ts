@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class ProductService {
+  isModalOpen = false;
   styleList = ['Плаття', 'Штани', 'Спортивний одяг',
     'Куртки', 'Пальта', 'Футболки',
     'Майки', 'кардигани', 'шорти', 'комбенізони',

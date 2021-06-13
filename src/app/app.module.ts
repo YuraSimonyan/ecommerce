@@ -24,6 +24,7 @@ import {environment} from '../environments/environment';
 import {ProductState} from './shared/store/product.state';
 import {FooterComponent} from './footer/footer.component';
 import { ServicesComponent } from './shell/main/services/services.component';
+import { AboutComponent } from './shell/main/about/about.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ServicesComponent } from './shell/main/services/services.component';
     ProductDetailComponent,
     FooterComponent,
     ServicesComponent,
+    AboutComponent,
 
   ],
   imports: [
