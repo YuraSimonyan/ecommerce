@@ -6,6 +6,7 @@ import {GetProductsAction} from '../../../shared/store/product.action';
 import {Observable} from 'rxjs';
 import {FilterService} from '../../../shared/services/filter.service';
 import {ProductService} from '../../../shared/services/product.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-products-grid',
@@ -15,6 +16,14 @@ import {ProductService} from '../../../shared/services/product.service';
 export class ProductsGridComponent implements OnInit {
   public listProducts;
   public filterValue;
+  pageEvent: PageEvent;
+  datasource: null;
+  pageIndex: number;
+  pageSize: number;
+  length: number;
+
+  @Select(ProductState.productData)
+  $products: Observable<any>;
 
   constructor(
     private productService: ProductService,
@@ -24,10 +33,9 @@ export class ProductsGridComponent implements OnInit {
   ) {
   }
 
-  @Select(ProductState.productData)
-  $products: Observable<any>;
-
   ngOnInit(): void {
+    this.getServerData(null);
+
 
     this.filterService.fetchProducts.subscribe(() => {
         this.$products.subscribe(value => this.listProducts = value);
@@ -88,5 +96,20 @@ export class ProductsGridComponent implements OnInit {
 
   showDetails(id): void {
     this.route.navigate(['details', id]);
+  }
+
+  public getServerData(event?: PageEvent): PageEvent {
+    this.$products.subscribe(
+      response => {
+        if (response.error) {
+        } else {
+          this.datasource = response.data;
+          this.pageIndex = response.pageIndex;
+          this.pageSize = response.pageSize;
+          this.length = response.length;
+        }
+      }
+    );
+    return event;
   }
 }
