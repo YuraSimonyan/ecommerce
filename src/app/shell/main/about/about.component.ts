@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -8,10 +7,11 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    this.dialog.closeAll();
+
   }
 
 }
