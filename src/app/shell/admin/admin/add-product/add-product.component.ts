@@ -18,12 +18,12 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = new FormGroup({
-      title: new FormControl('', Validators.required),
+      title: new FormControl('', [Validators.required, Validators.min(6), Validators.max(20)]),
       description: new FormControl('', Validators.required),
       style: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
+      price: new FormControl('', [Validators.required]),
       material: new FormGroup({
-        materialName: new FormControl(),
+        materialName: new FormControl('', Validators.required),
         materialPhoto: new FormArray([], Validators.required),
       }),
       photos: new FormArray([])
@@ -42,6 +42,14 @@ export class AddProductComponent implements OnInit {
       this.productForm.get('material').value,
       this.productForm.get('photos').value
     )).subscribe();
+    this.productForm.reset();
+    for (const key in this.productForm.controls) {
+      this.productForm.get(key).clearValidators();
+      this.productForm.get(key).updateValueAndValidity();
+    }
+    (this.productForm.get('material').get('materialPhoto') as FormArray).clear();
+    (this.productForm.get('photos') as FormArray).clear();
+
   }
 
   onFileSelected(event): void {

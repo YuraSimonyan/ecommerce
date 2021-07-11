@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
         this.productService.isModalOpen = true;
         this.dialog.open(MainModalComponent);
       }
-    }, 4);
+    }, 5000);
   }
 
 

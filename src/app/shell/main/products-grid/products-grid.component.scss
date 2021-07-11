@@ -72,6 +72,7 @@ section {
 .outline {
   text-decoration: line-through;
 }
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -79,6 +80,7 @@ section {
 }
 
 .pagination a {
+  cursor: pointer;
   color: black;
   float: left;
   padding: 8px 16px;
@@ -90,6 +92,8 @@ section {
   color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
 
 

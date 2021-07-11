@@ -4,7 +4,7 @@
     <div class="slider__list">
       <ng-container *ngFor="let img of (productData | async)?.img; let i = index">
         <div class="slider__list-item" (click)="onChangeImg($event, i)">
-          <img src="{{img}}">
+          <img src="{{img}}" alt="photo">
         </div>
       </ng-container>
     </div>
@@ -26,7 +26,7 @@
     <div class="info__material">
       <div class="info__material-name">{{(productData | async)?.material?.materialName}}</div>
       <div class="info__material-image">
-        <img src="{{(productData | async)?.material?.materialPhoto}}" alt="">
+        <img src="{{(productData | async)?.material?.materialPhoto}}"  alt="photo">
       </div>
     </div>
     <div class="info__size">
