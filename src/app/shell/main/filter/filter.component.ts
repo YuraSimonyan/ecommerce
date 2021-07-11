@@ -30,7 +30,6 @@ export class FilterComponent implements OnInit {
     for (const item in this.filterService.appliedFilters.value) {
       if (typeof this.filterService.appliedFilters.value[item] === 'object') {
         for (const subItem in this.filterService.appliedFilters.value[item]) {
-          console.log(this.filterService.appliedFilters.value[item]);
           this.filterService.appliedFilters.value[item][subItem] = '';
         }
       } else {

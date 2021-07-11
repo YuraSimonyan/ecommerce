@@ -11,10 +11,19 @@
       <div class="product-item__button" (click)="showDetails(product?.id)">Детальніше</div>
     </div>
   </div>
-  <button (click)="nextPage()" [disabled]="(this.currentPageProducts | async)?.length < 6">
-    Наступна сторінка
-  </button>
-  <button (click)="previousPage()" [disabled]="this.currentPageValue.value === 0">
-    Попередня сторінка
-  </button>
+  <!--  <button (click)="nextPage()" [disabled]="(this.currentPageProducts | async)?.length < 6">-->
+  <!--    Наступна сторінка-->
+  <!--  </button>-->
+  <!--  <button (click)="previousPage()" [disabled]="this.currentPageValue.value === 0">-->
+  <!--    Попередня сторінка-->
+  <!--  </button>-->
+  <div class="pagination">
+    <a href="#" (click)="nextPage(this.currentPageValue.value - 1 )"
+       [ngStyle]="{'pointer-events': (this.currentPageValue.value === 0)? 'none': 'auto' }">&laquo;</a>
+    <ng-container *ngFor="let paginator of paginatorValue">
+      <a href="#" (click)="nextPage(paginator-1)">{{paginator}}</a>
+    </ng-container>
+
+    <a href="#" (click)="nextPage(this.currentPageValue.value + 1 )"  [ngStyle]="{'pointer-events': (this.currentPageProducts.value.length < 6)? 'none': 'auto' }">&raquo;</a>
+  </div>
 </section>

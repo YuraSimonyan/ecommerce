@@ -16,6 +16,7 @@ import {ProductModel} from '../../../shared/models/product.model';
 export class ProductsGridComponent implements OnInit, AfterViewInit {
   public listProducts;
   public filterValue;
+  public paginatorValue = [];
 
   public datasource: null;
   public length: number;
@@ -37,20 +38,20 @@ export class ProductsGridComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.filterService.clearFilter.subscribe(value => {
+      this.currentPageProducts.next(this.listProducts);
+      this.currentPageValue.next(0);
+    });
     this.$products.subscribe((value: ProductModel[]) => {
       this.listProducts = value;
-      this.currentPageProducts.next(this.listProducts.slice(this.currentPageValue.value, 6 + this.currentPageValue.value));
+      for (let i = 0; i < this.listProducts.length / 6; i++) {
+        this.paginatorValue.push(i + 1);
+      }
+      this.currentPageProducts.next(this.listProducts.slice(this.currentPageValue.value * 6, 6 + this.currentPageValue.value));
     });
-    // this.filterService.clearFilter.subscribe((value => {
-    //   if (this.filterService.filterState) {
-    //     this.currentPageValue.next(0);
-    //   }
-    //   this.currentPageValue.next(0);
-    // }));
-
 
     this.currentPageValue.subscribe(() => {
-      this.currentPageProducts.next(this.listProducts.slice(this.currentPageValue.value, 6 + this.currentPageValue.value));
+      this.currentPageProducts.next(this.listProducts.slice(this.currentPageValue.value * 6, (this.currentPageValue.value + 6)));
     });
 
     this.store.dispatch(new GetProductsAction());
@@ -68,31 +69,32 @@ export class ProductsGridComponent implements OnInit, AfterViewInit {
     });
 
     this.filterService.filterState.subscribe((value: any) => {
+      let products;
       if (value?.price.min && !value?.price.max && !value.style) {
-        this.currentPageProducts.next(this.listProducts.filter((item => item.price >= value?.price.min)).slice(0, 6));
+        products = this.listProducts.filter((item => item.price >= value?.price.min));
       }
       if (value?.price.max && !this.filterValue?.price.min && !value.style) {
-        this.currentPageProducts.next(this.listProducts.filter((item => item.price <= value?.price.max)).slice(0, 6));
+        products = this.listProducts.filter((item => item.price <= value?.price.max));
       }
 
       if (value?.price.min && value?.price.max && !value.style) {
-        this.currentPageProducts.next(this.listProducts.filter(
-          (item => item.price >= value?.price.min && item.price <= value?.price.max)).slice(0, 6));
+        products = this.listProducts.filter(
+          (item => item.price >= value?.price.min && item.price <= value?.price.max));
       }
       if (value?.price.min && value?.price.max && value.style) {
-        this.currentPageProducts.next(this.listProducts.filter(
-          (item => item.style === value.style && item.price >= value?.price.min && item.price <= value.price.max)).slice(0, 6));
+        products = this.listProducts.filter(
+          (item => item.style === value.style && item.price >= value?.price.min && item.price <= value.price.max));
       }
       if (value?.style && !value?.price.min && !value?.price.max) {
-        this.currentPageProducts.next(this.listProducts.filter(item => item.style === value?.style).slice(0, 6));
+        products = this.listProducts.filter(item => item.style === value?.style);
       }
       if (value?.style && value?.price.min && !value?.price.max) {
-        this.currentPageProducts.next(this.listProducts.filter(item => item.style === value?.style && item.price >= value?.price.min).slice(0, 6));
+        products = this.listProducts.filter(item => item.style === value?.style && item.price >= value?.price.min);
       }
       if (value?.style && !value?.price.min && value?.price.max) {
-        this.currentPageProducts.next(this.listProducts.filter(item => item.style === value?.style && item.price <= value?.price.max).slice(0, 6));
+        products = this.listProducts.filter(item => item.style === value?.style && item.price <= value?.price.max);
       }
-
+      this.currentPageProducts.next(products);
     });
     // this.currentPageProducts = this.listProducts.slice(this.currentPageValue.value, 6 + this.currentPageValue.value);
   }
@@ -101,33 +103,9 @@ export class ProductsGridComponent implements OnInit, AfterViewInit {
     this.route.navigate(['details', id]);
   }
 
-  // public getServerData(event?: PageEvent): PageEvent {
-  //   this.$products.subscribe(
-  //     response => {
-  //       if (response.error) {
-  //       } else {
-  //         if (this.listProducts) {
-  //           this.datasource = response.data;
-  //           this.pageIndex = response.pageIndex;
-  //           this.pageSize = response.pageSize;
-  //           this.length = response.length;
-  //         }
-  //
-  //       }
-  //     }
-  //   );
-  //   return event;
-  // }
-  nextPage(): void {
-    this.currentPageValue.next(this.currentPageValue.value + 6);
+  nextPage(value?: number): void {
+    this.currentPageValue.next(value);
 
   }
 
-  cleanFilter(): void {
-
-  }
-
-  previousPage(): void {
-    this.currentPageValue.next(this.currentPageValue.value - 6);
-  }
 }

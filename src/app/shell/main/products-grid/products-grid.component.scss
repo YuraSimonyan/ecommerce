@@ -6,6 +6,7 @@ section {
   .product-loop {
     width: 100%;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
   }
 
@@ -71,5 +72,24 @@ section {
 .outline {
   text-decoration: line-through;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
 
