@@ -13,7 +13,7 @@ export class AddProductComponent implements OnInit {
   productForm: FormGroup;
   listStyles = this.productService.styleList;
 
-  constructor(private datePipe: DatePipe, private productService: ProductService) {
+  constructor(public datePipe: DatePipe, public productService: ProductService) {
   }
 
   ngOnInit(): void {

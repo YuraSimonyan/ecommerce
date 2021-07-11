@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   addValueDataBase(value: ProductModel): Observable<any> {
-    return this.http.post('https://pasha2-fe82f-default-rtdb.firebaseio.com/products.json', value);
+    return this.http.post<ProductModel>('https://pasha2-fe82f-default-rtdb.firebaseio.com/products.json', value);
 
   }
 
@@ -25,8 +25,8 @@ export class ProductService {
 
   }
 
-  getProduct(): Observable<any> {
-    return this.http.get('https://pasha2-fe82f-default-rtdb.firebaseio.com/products.json');
+  getProduct(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>('https://pasha2-fe82f-default-rtdb.firebaseio.com/products.json');
 
   }
 

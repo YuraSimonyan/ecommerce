@@ -11,17 +11,10 @@ export class FilterComponent implements OnInit {
     'Куртки', 'Пальта', 'Футболки',
     'Майки', 'Кардигани', 'Шорти', 'Комбенізони',
     'Халати', 'Блузки', 'Спідниці', 'Жилетки', 'Спецодяг', 'Сумки'];
-  appliedFilters = {
-    style: '',
-    price: {
-      max: '',
-      min: ''
-    }
-  };
   isExpanded = false;
 
 
-  constructor(private filterService: FilterService) {
+  constructor(public filterService: FilterService) {
   }
 
   ngOnInit(): void {
@@ -29,25 +22,25 @@ export class FilterComponent implements OnInit {
   }
 
   onAddStyle(style, toggleStyle): void {
-    this.appliedFilters.style = style;
+    this.filterService.appliedFilters.value.style = style;
     toggleStyle.close();
   }
 
   clearFilter(): void {
-    this.filterService.fetchProducts.next();
-    for (const item in this.appliedFilters) {
-      if (typeof this.appliedFilters[item] === 'object') {
-        for (const subItem in this.appliedFilters[item]) {
-          console.log(this.appliedFilters[item]);
-          this.appliedFilters[item][subItem] = '';
+    for (const item in this.filterService.appliedFilters.value) {
+      if (typeof this.filterService.appliedFilters.value[item] === 'object') {
+        for (const subItem in this.filterService.appliedFilters.value[item]) {
+          console.log(this.filterService.appliedFilters.value[item]);
+          this.filterService.appliedFilters.value[item][subItem] = '';
         }
       } else {
-        this.appliedFilters[item] = '';
+        this.filterService.appliedFilters.value[item] = '';
       }
     }
+    this.filterService.clearFilter.next(true);
   }
 
   serchFilter(): void {
-    this.filterService.filterState.next(this.appliedFilters);
+    this.filterService.filterState.next(this.filterService.appliedFilters.value);
   }
 }

@@ -8,6 +8,8 @@ export class ProductModel {
               public promotedPrice: any,
               public date: any,
               public material: { materialName: any, materialPhoto: [any] },
-              public img: any[]) {
+              public img: any[],
+              public id?: any
+  ) {
   }
 }

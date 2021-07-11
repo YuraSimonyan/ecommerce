@@ -10,7 +10,7 @@ import {ProductService} from '../../shared/services/product.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  constructor(private filterService: FilterService, private dialog: MatDialog, private productService: ProductService) {
+  constructor(public filterService: FilterService, private dialog: MatDialog, private productService: ProductService) {
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -22,14 +22,15 @@ export class MainComponent implements OnInit {
   }
 
   mainModal(): void {
-    if (window.pageYOffset > 40) {
-      if (this.productService.isModalOpen) {
-        return;
+    setTimeout(() => {
+      if (window.pageYOffset > 40) {
+        if (this.productService.isModalOpen) {
+          return;
+        }
+        this.productService.isModalOpen = true;
+        this.dialog.open(MainModalComponent);
       }
-      this.productService.isModalOpen = true;
-      this.dialog.open(MainModalComponent);
-    }
-
+    }, 4);
   }
 
 

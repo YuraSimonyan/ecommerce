@@ -6,11 +6,13 @@
         <div class="filter_clear-button" (click)="clearFilter()">Очистити</div>
       </li>
       <li class="filter_item" style="padding: 10px 0"
-          *ngIf="appliedFilters.style || appliedFilters.price.min || appliedFilters.price.max;">
+          *ngIf="this.filterService.appliedFilters.value.style || this.filterService.appliedFilters.value.price.min || this.filterService.appliedFilters.value.price.max;">
         <mat-chip-list aria-label="Fish selection">
-          <mat-chip *ngIf="appliedFilters.price.min && appliedFilters.price.max">{{appliedFilters.price.min}}
-            - {{appliedFilters.price.max}}</mat-chip>
-          <mat-chip *ngIf="appliedFilters.style">{{appliedFilters.style}}</mat-chip>
+          <mat-chip
+            *ngIf="this.filterService.appliedFilters.value.price.min && this.filterService.appliedFilters.value.price.max">{{this.filterService.appliedFilters.value.price.min}}
+            - {{this.filterService.appliedFilters.value.price.max}}</mat-chip>
+          <mat-chip
+            *ngIf="this.filterService.appliedFilters.value.style">{{this.filterService.appliedFilters.value.style}}</mat-chip>
         </mat-chip-list>
       </li>
       <li class="filter_item filter_item-style">
@@ -36,11 +38,11 @@
           </mat-expansion-panel-header>
           <mat-form-field>
             <mat-label>Від</mat-label>
-            <input matInput type="number" [(ngModel)]="appliedFilters?.price.min">
+            <input matInput type="number" [(ngModel)]="this.filterService.appliedFilters.value?.price.min">
           </mat-form-field>
           <mat-form-field>
             <mat-label>До</mat-label>
-            <input matInput type="number" [(ngModel)]="appliedFilters?.price.max">
+            <input matInput type="number" [(ngModel)]="this.filterService.appliedFilters.value?.price.max">
           </mat-form-field>
         </mat-expansion-panel>
       </li>

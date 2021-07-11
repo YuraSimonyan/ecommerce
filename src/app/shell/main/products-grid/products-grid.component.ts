@@ -1,115 +1,133 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
 import {ProductState} from '../../../shared/store/product.state';
 import {GetProductsAction} from '../../../shared/store/product.action';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {FilterService} from '../../../shared/services/filter.service';
 import {ProductService} from '../../../shared/services/product.service';
-import {PageEvent} from '@angular/material/paginator';
+import {ProductModel} from '../../../shared/models/product.model';
 
 @Component({
   selector: 'app-products-grid',
   templateUrl: './products-grid.component.html',
   styleUrls: ['./products-grid.component.scss']
 })
-export class ProductsGridComponent implements OnInit {
+export class ProductsGridComponent implements OnInit, AfterViewInit {
   public listProducts;
   public filterValue;
-  pageEvent: PageEvent;
-  datasource: null;
-  pageIndex: number;
-  pageSize: number;
-  length: number;
 
+  public datasource: null;
+  public length: number;
+
+  public currentPageValue = new BehaviorSubject(0);
+  public currentPageProducts: BehaviorSubject<ProductModel[]> = new BehaviorSubject(null);
   @Select(ProductState.productData)
-  $products: Observable<any>;
+  $products: Observable<ProductModel[]>;
 
   constructor(
     private productService: ProductService,
-    private filterService: FilterService,
+    public filterService: FilterService,
     private route: Router,
     private store: Store
   ) {
   }
 
+  ngAfterViewInit(): void {
+  }
+
   ngOnInit(): void {
-    this.getServerData(null);
-
-
-    this.filterService.fetchProducts.subscribe(() => {
-        this.$products.subscribe(value => this.listProducts = value);
-      }
-    );
-    this.$products.subscribe((value) => {
+    this.$products.subscribe((value: ProductModel[]) => {
       this.listProducts = value;
-      console.log(this.listProducts);
+      this.currentPageProducts.next(this.listProducts.slice(this.currentPageValue.value, 6 + this.currentPageValue.value));
     });
-    this.filterService.sortState.subscribe(value => {
-      this.$products.subscribe((products) => {
-          if (value === 'high') {
-            this.listProducts = products.sort((a, b) => {
-              return +(a.price.slice(1)) - (+b.price.slice(1));
-            });
-          } else {
-            this.listProducts = products.sort((a, b) => {
-              return +(+b.price.slice(1)) - (+a.price.slice(1));
-            });
-          }
+    // this.filterService.clearFilter.subscribe((value => {
+    //   if (this.filterService.filterState) {
+    //     this.currentPageValue.next(0);
+    //   }
+    //   this.currentPageValue.next(0);
+    // }));
 
-        }
-      );
+
+    this.currentPageValue.subscribe(() => {
+      this.currentPageProducts.next(this.listProducts.slice(this.currentPageValue.value, 6 + this.currentPageValue.value));
     });
 
-    this.filterService.filterState.subscribe((value) => {
-      this.filterValue = value;
-      this.$products.subscribe((products) => {
-        if (this.filterValue.price.min && !this.filterValue.price.max && !this.filterValue.style) {
-          this.listProducts = products.filter((item => +(item.price.slice(1)) >= this.filterValue.price.min));
-        }
-        if (this.filterValue.price.max && !this.filterValue.price.min && !this.filterValue.style) {
-          this.listProducts = products.filter((item => +(item.price.slice(1)) <= this.filterValue.price.max));
-        }
-
-        if (this.filterValue.price.min && this.filterValue.price.max && !this.filterValue.style) {
-          this.listProducts = products.filter(
-            (item => +(item.price.slice(1)) >= this.filterValue.price.min && +(item.price.slice(1)) <= this.filterValue.price.max));
-        }
-        if (this.filterValue.price.min && this.filterValue.price.max && this.filterValue.style) {
-          this.listProducts = products.filter(
-            (item => item.style === this.filterValue.style && +(item.price.slice(1)) >= this.filterValue.price.min && +(item.price.slice(1)) <= this.filterValue.price.max));
-        }
-        if (this.filterValue.style && !this.filterValue.price.min && !this.filterValue.price.max) {
-          this.listProducts = products.filter(item => item.style === this.filterValue.style);
-        }
-        if (this.filterValue.style && this.filterValue.price.min && !this.filterValue.price.max) {
-          this.listProducts = products.filter(item => item.style === this.filterValue.style && +(item.price.slice(1)) >= this.filterValue.price.min);
-        }
-        if (this.filterValue.style && !this.filterValue.price.min && this.filterValue.price.max) {
-          this.listProducts = products.filter(item => item.style === this.filterValue.style && +(item.price.slice(1)) <= this.filterValue.price.max);
-        }
-      });
-
-    });
     this.store.dispatch(new GetProductsAction());
+    this.filterService.sortState.subscribe(value => {
+      if (value === 'high') {
+        this.currentPageProducts.next(this.listProducts.sort((a, b) => {
+          return a.price - b.price;
+        }).slice(0, 6));
+      } else {
+        this.currentPageProducts.next(this.listProducts.sort((a, b) => {
+          return b.price - a.price;
+        }).slice(0, 6));
+      }
+
+    });
+
+    this.filterService.filterState.subscribe((value: any) => {
+      if (value?.price.min && !value?.price.max && !value.style) {
+        this.currentPageProducts.next(this.listProducts.filter((item => item.price >= value?.price.min)).slice(0, 6));
+      }
+      if (value?.price.max && !this.filterValue?.price.min && !value.style) {
+        this.currentPageProducts.next(this.listProducts.filter((item => item.price <= value?.price.max)).slice(0, 6));
+      }
+
+      if (value?.price.min && value?.price.max && !value.style) {
+        this.currentPageProducts.next(this.listProducts.filter(
+          (item => item.price >= value?.price.min && item.price <= value?.price.max)).slice(0, 6));
+      }
+      if (value?.price.min && value?.price.max && value.style) {
+        this.currentPageProducts.next(this.listProducts.filter(
+          (item => item.style === value.style && item.price >= value?.price.min && item.price <= value.price.max)).slice(0, 6));
+      }
+      if (value?.style && !value?.price.min && !value?.price.max) {
+        this.currentPageProducts.next(this.listProducts.filter(item => item.style === value?.style).slice(0, 6));
+      }
+      if (value?.style && value?.price.min && !value?.price.max) {
+        this.currentPageProducts.next(this.listProducts.filter(item => item.style === value?.style && item.price >= value?.price.min).slice(0, 6));
+      }
+      if (value?.style && !value?.price.min && value?.price.max) {
+        this.currentPageProducts.next(this.listProducts.filter(item => item.style === value?.style && item.price <= value?.price.max).slice(0, 6));
+      }
+
+    });
+    // this.currentPageProducts = this.listProducts.slice(this.currentPageValue.value, 6 + this.currentPageValue.value);
   }
 
   showDetails(id): void {
     this.route.navigate(['details', id]);
   }
 
-  public getServerData(event?: PageEvent): PageEvent {
-    this.$products.subscribe(
-      response => {
-        if (response.error) {
-        } else {
-          this.datasource = response.data;
-          this.pageIndex = response.pageIndex;
-          this.pageSize = response.pageSize;
-          this.length = response.length;
-        }
-      }
-    );
-    return event;
+  // public getServerData(event?: PageEvent): PageEvent {
+  //   this.$products.subscribe(
+  //     response => {
+  //       if (response.error) {
+  //       } else {
+  //         if (this.listProducts) {
+  //           this.datasource = response.data;
+  //           this.pageIndex = response.pageIndex;
+  //           this.pageSize = response.pageSize;
+  //           this.length = response.length;
+  //         }
+  //
+  //       }
+  //     }
+  //   );
+  //   return event;
+  // }
+  nextPage(): void {
+    this.currentPageValue.next(this.currentPageValue.value + 6);
+
+  }
+
+  cleanFilter(): void {
+
+  }
+
+  previousPage(): void {
+    this.currentPageValue.next(this.currentPageValue.value - 6);
   }
 }
