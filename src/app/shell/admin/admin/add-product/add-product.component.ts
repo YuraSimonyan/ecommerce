@@ -41,15 +41,15 @@ export class AddProductComponent implements OnInit {
       this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
       this.productForm.get('material').value,
       this.productForm.get('photos').value
-    )).subscribe();
-    this.productForm.reset();
-    for (const key in this.productForm.controls) {
-      this.productForm.get(key).clearValidators();
-      this.productForm.get(key).updateValueAndValidity();
-    }
-    (this.productForm.get('material').get('materialPhoto') as FormArray).clear();
-    (this.productForm.get('photos') as FormArray).clear();
-
+    )).subscribe(() => {
+      this.productForm.reset();
+      for (const key in this.productForm.controls) {
+        this.productForm.get(key).clearValidators();
+        this.productForm.get(key).updateValueAndValidity();
+      }
+      (this.productForm.get('material').get('materialPhoto') as FormArray).clear();
+      (this.productForm.get('photos') as FormArray).clear();
+    });
   }
 
   onFileSelected(event): void {
