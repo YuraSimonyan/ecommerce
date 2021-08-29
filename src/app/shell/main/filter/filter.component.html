@@ -1,54 +1,62 @@
 <section>
-  <div class="filter">
-    <ul class="filter_list">
-      <li class="filter_item clear">
-        ФІЛЬТР
-        <div class="filter_clear-button" (click)="clearFilter()">Очистити</div>
-      </li>
-      <li class="filter_item" style="padding: 10px 0"
-          *ngIf="this.filterService.appliedFilters.value.style || this.filterService.appliedFilters.value.price.min || this.filterService.appliedFilters.value.price.max;">
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip
-            *ngIf="this.filterService.appliedFilters.value.price.min && this.filterService.appliedFilters.value.price.max">{{this.filterService.appliedFilters.value.price.min}}
-            - {{this.filterService.appliedFilters.value.price.max}}</mat-chip>
-          <mat-chip
-            *ngIf="this.filterService.appliedFilters.value.style">{{this.filterService.appliedFilters.value.style}}</mat-chip>
-        </mat-chip-list>
-      </li>
-      <li class="filter_item filter_item-style">
-        <mat-expansion-panel hideToggle #styleOpen>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              СТИЛЬ
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div style="height: 80vh; overflow: scroll">
-            <mat-list role="list" *ngFor="let style of styleList">
-              <mat-list-item role="listitem" (click)="onAddStyle(style, styleOpen)">{{style}}</mat-list-item>
-            </mat-list>
-          </div>
-        </mat-expansion-panel>
-      </li>
-      <li class="filter_item filter_item-price">
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              ЦІНА
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-form-field>
-            <mat-label>Від</mat-label>
-            <input matInput type="number" [(ngModel)]="this.filterService.appliedFilters.value?.price.min">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>До</mat-label>
-            <input matInput type="number" [(ngModel)]="this.filterService.appliedFilters.value?.price.max">
-          </mat-form-field>
-        </mat-expansion-panel>
-      </li>
-      <li class="filter_search">
-        <button mat-button type="button" (click)="serchFilter()">Пошук</button>
-      </li>
-    </ul>
-  </div>
+    <div class="filter">
+        <ul class="filter_list">
+            <li class="filter_item clear">
+                ФІЛЬТР
+                <div class="filter_clear-button" (click)="clearFilter()">Очистити</div>
+            </li>
+            <li class="filter_item" style="padding: 10px 0"
+                *ngIf="
+              this.filterService.appliedFilters.value.style
+           || this.filterService.appliedFilters.value.price.min
+           || this.filterService.appliedFilters.value.price.max;"
+            >
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip
+                        *ngIf="
+                        this.filterService.appliedFilters.value.price.min
+                         && this.filterService.appliedFilters.value.price.max"
+                    >{{this.filterService.appliedFilters.value.price.min}}
+                        - {{this.filterService.appliedFilters.value.price.max}}</mat-chip>
+                    <mat-chip
+                        *ngIf="this.filterService.appliedFilters.value.style">{{this.filterService.appliedFilters.value.style}}</mat-chip>
+                </mat-chip-list>
+            </li>
+            <li class="filter_item filter_item-style">
+                <mat-expansion-panel hideToggle #styleOpen>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            СТИЛЬ
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div style="height: 80vh; overflow: scroll">
+                        <mat-list role="list" *ngFor="let style of styleList">
+                            <mat-list-item role="listitem"
+                                           (click)="onAddStyle(style, styleOpen)">{{style}}</mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-expansion-panel>
+            </li>
+            <li class="filter_item filter_item-price">
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            ЦІНА
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-form-field>
+                        <mat-label>Від</mat-label>
+                        <input matInput type="number" [(ngModel)]="this.filterService.appliedFilters.value?.price.min">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>До</mat-label>
+                        <input matInput type="number" [(ngModel)]="this.filterService.appliedFilters.value?.price.max">
+                    </mat-form-field>
+                </mat-expansion-panel>
+            </li>
+            <li class="filter_search">
+                <button mat-button type="button" (click)="searchFilter()">Пошук</button>
+            </li>
+        </ul>
+    </div>
 </section>

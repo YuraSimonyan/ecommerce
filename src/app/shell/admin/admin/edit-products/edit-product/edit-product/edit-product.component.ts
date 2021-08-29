@@ -5,9 +5,9 @@ import {GetProductsActionById} from '../../../../../../shared/store/product.acti
 import {ProductState} from '../../../../../../shared/store/product.state';
 import {Observable} from 'rxjs';
 import {ProductModel} from '../../../../../../shared/models/product.model';
-import {ProductService} from '../../../../../../shared/services/product.service';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {FilterService} from '../../../../../../shared/services/filter.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -17,7 +17,7 @@ import {DatePipe} from '@angular/common';
 export class EditProductComponent implements OnInit {
   productId;
 
-  listStyles = this.productService.styleList;
+  listStyles = this.filterService.styleList;
   product: ProductModel;
 
   @Select(ProductState.productItem)
@@ -28,8 +28,8 @@ export class EditProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store,
-    private productService: ProductService,
-    private datePipe: DatePipe,
+    private readonly filterService: FilterService,
+    private datePipe: DatePipe
   ) {
   }
 
@@ -79,7 +79,7 @@ export class EditProductComponent implements OnInit {
       this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
       this.productForm.controls['material'].value,
       this.productForm.controls['photos'].value);
-    this.productService.editProduct(editedProduct, this.productId);
+    this.filterService.editProduct(editedProduct, this.productId);
     console.log(editedProduct);
   }
 
@@ -105,4 +105,6 @@ export class EditProductComponent implements OnInit {
     const photosArray = this.productForm.get('photos') as FormArray;
     photosArray.removeAt(i);
   }
+
+
 }

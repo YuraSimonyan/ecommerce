@@ -16,47 +16,50 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
-  imports: [
-    MatInputModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatCardModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatProgressBarModule,
-    MatListModule,
-    MatChipsModule,
-    MatTableModule,
-    MatSortModule,
-    MatSlideToggleModule,
-    MatDialogModule,
-    MatPaginatorModule
+    imports: [
+        MatInputModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatSelectModule,
+        MatGridListModule,
+        MatCardModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        MatListModule,
+        MatChipsModule,
+        MatTableModule,
+        MatSortModule,
+        MatSlideToggleModule,
+        MatDialogModule,
+        MatPaginatorModule,
+        ScrollingModule
 
-  ],
-  exports: [
-    MatInputModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatCardModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatProgressBarModule,
-    MatListModule,
-    MatChipsModule,
-    MatTableModule,
-    MatSortModule,
-    MatSlideToggleModule,
-    MatDialogModule,
-    MatPaginatorModule
-  ],
+    ],
+    exports: [
+        MatInputModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatSelectModule,
+        MatGridListModule,
+        MatCardModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        MatListModule,
+        MatChipsModule,
+        MatTableModule,
+        MatSortModule,
+        MatSlideToggleModule,
+        MatDialogModule,
+        MatPaginatorModule,
+        ScrollingModule
+    ],
 
 
 })

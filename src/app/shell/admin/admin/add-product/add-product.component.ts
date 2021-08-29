@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProductModel} from '../../../../shared/models/product.model';
 import {DatePipe} from '@angular/common';
-import {ProductService} from '../../../../shared/services/product.service';
+import {FilterService} from '../../../../shared/services/filter.service';
 
 @Component({
   selector: 'app-add-product',
@@ -11,9 +11,9 @@ import {ProductService} from '../../../../shared/services/product.service';
 })
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;
-  listStyles = this.productService.styleList;
+  listStyles = this.filterService.styleList;
 
-  constructor(public datePipe: DatePipe, public productService: ProductService) {
+  constructor(public datePipe: DatePipe, public filterService: FilterService) {
   }
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.productService.addValueDataBase(new ProductModel(
+    this.filterService.addValueDataBase(new ProductModel(
       this.productForm.get('title').value,
       this.productForm.get('description').value,
       this.productForm.get('style').value,
@@ -69,4 +69,15 @@ export class AddProductComponent implements OnInit {
       };
     }
   }
+
+  onReset(): void {
+    this.productForm.reset();
+    for (const key in this.productForm.controls) {
+      this.productForm.get(key).clearValidators();
+      this.productForm.get(key).updateValueAndValidity();
+    }
+    (this.productForm.get('material').get('materialPhoto') as FormArray).clear();
+    (this.productForm.get('photos') as FormArray).clear();
+  }
+
 }
