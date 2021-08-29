@@ -4,6 +4,7 @@ import {ProductModel} from '../models/product.model';
 import {GetProductsAction, GetProductsActionById} from './product.action';
 import {map} from 'rxjs/operators';
 import {FilterService} from '../services/filter.service';
+import {HttpService} from '../services/http.service';
 
 export interface ProductStateModel {
     productData: ProductModel[];
@@ -19,7 +20,10 @@ export interface ProductStateModel {
 })
 @Injectable()
 export class ProductState {
-    constructor(private filterService: FilterService) {
+    constructor(
+        private readonly filterService: FilterService,
+        private readonly httpService: HttpService
+                ) {
     }
 
     @Selector()
@@ -34,7 +38,7 @@ export class ProductState {
 
     @Action(GetProductsAction)
     GetProductsAction({patchState}: StateContext<ProductStateModel>): void {
-        this.filterService.getProduct().pipe(map(((value: ProductModel[]) => {
+        this.httpService.getProduct().pipe(map(((value: ProductModel[]) => {
             const productArr = [];
             for (const key in value) {
                 value[key]['id'] = key;
@@ -50,7 +54,7 @@ export class ProductState {
     GetProductsActionById(
         {patchState}: StateContext<ProductStateModel>,
         {id}: GetProductsActionById): void {
-        this.filterService.getProduct().subscribe(value => {
+        this.httpService.getProduct().subscribe(value => {
             patchState({productItem: value[id]});
         });
     }

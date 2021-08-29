@@ -1,15 +1,12 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {GetProductsAction} from '../store/product.action';
-import {ProductModel} from '../models/product.model';
-import {Store} from '@ngxs/store';
-import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {ProductService} from './product.service';
 
 @Injectable({providedIn: 'root'})
 export class FilterService implements OnDestroy {
     public filterState = new Subject();
     public sortState = new Subject();
-    public listProducts: ProductModel[];
+
     public isModalOpen = false;
 
     public styleList = ['Плаття', 'Штани', 'Спортивний одяг',
@@ -17,48 +14,59 @@ export class FilterService implements OnDestroy {
         'Майки', 'кардигани', 'шорти', 'комбенізони',
         'Халати', 'блузки', 'спідниці', 'жилетки', 'спецодяг', 'сумки'];
     public filterValue;
-    clearFilterSubject = new BehaviorSubject(null);
-    filters = {
+    public clearFilterSubject = new BehaviorSubject(null);
+    public filters = {
         style: '',
         price: {
             max: 0,
             min: 0
         }
     };
-    appliedFilters = new BehaviorSubject(this.filters);
+    public appliedFilters = new BehaviorSubject(this.filters);
 
-    constructor(
-        private readonly store: Store,
-        private readonly http: HttpClient
+    constructor(private readonly productService: ProductService
     ) {
         this.filterState.subscribe((value: any) => {
-            let products;
             if (value?.price.min && !value?.price.max && !value.style) {
-                products = this.listProducts.filter((item => item.price >= value?.price.min));
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter((item => item.price >= value?.price.min));
+                return;
             }
             if (value?.price.max && !this.filterValue?.price.min && !value.style) {
-                products = this.listProducts.filter((item => item.price <= value?.price.max));
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter((item => item.price <= value?.price.max));
+                return;
             }
 
             if (value?.price.min && value?.price.max && !value.style) {
-                products = this.listProducts.filter(
-                    (item => item.price >= value?.price.min && item.price <= value?.price.max));
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter(
+                        (item => item.price >= value?.price.min && item.price <= value?.price.max));
+                return;
             }
             if (value?.price.min && value?.price.max && value.style) {
-                products = this.listProducts.filter(
-                    (item => item.style === value.style && item.price >= value?.price.min && item.price <= value.price.max));
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter(
+                        (item => item.style === value.style && item.price >= value?.price.min && item.price <= value.price.max));
+                return;
             }
             if (value?.style && !value?.price.min && !value?.price.max) {
-                products = this.listProducts.filter(item => item.style === value?.style);
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter(item => item.style === value?.style);
+                return;
             }
             if (value?.style && value?.price.min && !value?.price.max) {
-                products = this.listProducts.filter(item => item.style === value?.style && item.price >= value?.price.min);
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter(item => item.style === value?.style && item.price >= value?.price.min);
+                return;
             }
             if (value?.style && !value?.price.min && value?.price.max) {
-                products = this.listProducts.filter(item => item.style === value?.style && item.price <= value?.price.max);
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter(item => item.style === value?.style && item.price <= value?.price.max);
+                return;
             }
-            // this.currentPageProducts.next(products);
         });
+
     }
 
     sortHigh(): void {
@@ -86,23 +94,6 @@ export class FilterService implements OnDestroy {
         this.filterState.next(this.appliedFilters.value);
     }
 
-    public dispatchDataFromStore(): void {
-        this.store.dispatch(new GetProductsAction());
-    }
-
-
-    addValueDataBase(value: ProductModel): Observable<ProductModel> {
-        return this.http.post<ProductModel>('https://database-25cda-default-rtdb.firebaseio.com/products.json', value);
-    }
-
-    editProduct(value, id): void {
-        this.http.patch(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`, value).subscribe();
-
-    }
-
-    getProduct(): Observable<ProductModel[]> {
-        return this.http.get<ProductModel[]>('https://database-25cda-default-rtdb.firebaseio.com/products.json');
-    }
 
     ngOnDestroy(): void {
     }

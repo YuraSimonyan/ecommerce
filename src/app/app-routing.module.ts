@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {MainComponent} from './shell/main/main.component';
-import {AdminPageComponent} from './shell/admin/admin/admin-page.component';
+import {AdminPageComponent} from './shell/admin/product-interactions/admin-page.component';
 import {ProductDetailComponent} from './shell/main/product-detail/product-detail.component';
-import {EditProductComponent} from './shell/admin/admin/edit-products/edit-product/edit-product/edit-product.component';
+import {EditProductComponent} from './shell/admin/product-interactions/edit-products/edit-product/edit-product/edit-product.component';
 import {ServicesComponent} from './shell/main/services/services.component';
 import {AboutComponent} from './shell/main/about/about.component';
 

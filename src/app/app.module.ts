@@ -23,45 +23,47 @@ import {ProductDetailComponent} from './shell/main/product-detail/product-detail
 import {environment} from '../environments/environment';
 import {ProductState} from './shared/store/product.state';
 import {FooterComponent} from './footer/footer.component';
-import { ServicesComponent } from './shell/main/services/services.component';
-import { AboutComponent } from './shell/main/about/about.component';
+import {ServicesComponent} from './shell/main/services/services.component';
+import {AboutComponent} from './shell/main/about/about.component';
+import { LoginComponent } from './shell/admin/login/login.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FilterComponent,
-    MainComponent,
-    ProductsGridComponent,
-    ProductDetailComponent,
-    FooterComponent,
-    ServicesComponent,
-    AboutComponent,
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FilterComponent,
+        MainComponent,
+        ProductsGridComponent,
+        ProductDetailComponent,
+        FooterComponent,
+        ServicesComponent,
+        AboutComponent,
 
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    HttpClientModule,
-    AdminModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxsModule.forRoot([ProductState]),
-    NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: environment.production
-    }),
-    NgxsLoggerPluginModule.forRoot({
-      disabled: environment.production
-    }),
-    MatIconModule
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        HttpClientModule,
+        AdminModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxsModule.forRoot([ProductState]),
+        NgxsReduxDevtoolsPluginModule.forRoot({
+            disabled: environment.production
+        }),
+        NgxsLoggerPluginModule.forRoot({
+            disabled: environment.production
+        }),
+        MatIconModule
+
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

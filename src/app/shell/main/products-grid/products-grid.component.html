@@ -1,14 +1,16 @@
 <section>
-    <cdk-virtual-scroll-viewport class="product-loop" itemSize="200">
-        <div class="product-item" *cdkVirtualFor="let product of (this.$products | async)">
+    <div class="product-loop">
+        <div class="product-item" *ngFor="let product of this.productService.listProducts">
             <div class="product-item__image">
-                <img src="{{product.img[0]}}" class="product-item__image">
+                <img src="{{product?.img[0]}}" class="product-item__image">
             </div>
             <div class="product-item__name">{{product?.title}}</div>
             <div [ngClass]="{outline: product.isPromoted}" class="product-item__price">₴{{product?.price}}</div>
-            <div *ngIf="product.isPromoted" class="product-item__price highlighted" style="color: red;">
-                ₴{{product.promotedPrice}}</div>
-            <div class="product-item__button" (click)="showDetails(product?.id)">Детальніше</div>
+            <div *ngIf="product?.isPromoted" class="product-item__price highlighted" style="color: red;">
+                ₴{{product?.promotedPrice}}</div>
+            <div class="product-item__action">
+                <div class="product-item__button" (click)="showDetails(product?.id)">Детальніше</div>
+            </div>
         </div>
-    </cdk-virtual-scroll-viewport>
+    </div>
 </section>

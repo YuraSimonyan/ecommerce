@@ -1,15 +1,15 @@
 export class ProductModel {
 
-  constructor(public title: any,
-              public description: any,
-              public style: any,
-              public price: any,
-              public isPromoted: any,
-              public promotedPrice: any,
-              public date: any,
+  constructor(public title: string,
+              public description: string,
+              public style: string,
+              public price: number | string,
+              public isPromoted: boolean,
+              public promotedPrice: number | string,
+              public date: string,
               public material: { materialName: any, materialPhoto: [any] },
               public img: any[],
-              public id?: any
+              public id?: string
   ) {
   }
 }

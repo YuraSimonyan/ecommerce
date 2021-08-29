@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Select} from '@ngxs/store';
 import {ProductState} from '../../../shared/store/product.state';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {FilterService} from '../../../shared/services/filter.service';
 import {ProductModel} from '../../../shared/models/product.model';
+import {ProductService} from '../../../shared/services/product.service';
 
 
 @Component({
@@ -12,25 +13,38 @@ import {ProductModel} from '../../../shared/models/product.model';
     templateUrl: './products-grid.component.html',
     styleUrls: ['./products-grid.component.scss']
 })
-export class ProductsGridComponent implements OnInit {
+export class ProductsGridComponent implements OnInit, OnDestroy {
 
     public datasource: null;
     public length: number;
     @Select(ProductState.productData)
     $products: Observable<ProductModel[]>;
+    private subscription: Subscription;
 
     constructor(
-        public filterService: FilterService,
-        private route: Router,
+        public readonly filterService: FilterService,
+        private readonly route: Router,
+        public readonly productService: ProductService
     ) {
     }
 
     ngOnInit(): void {
-        this.filterService.dispatchDataFromStore();
+        this.productService.dispatchProductsFromStore();
+        this.filterService.clearFilterSubject.subscribe(() => {
+            this.productService.listProducts = this.productService.initListProductsSubject.value;
+        });
+        this.subscription = this.$products.subscribe((productList) => {
+            this.productService.initListProductsSubject.next(productList);
+            this.productService.listProducts = this.productService.initListProductsSubject.value;
+        });
     }
 
     showDetails(id): void {
         this.route.navigate(['details', id]);
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
 }

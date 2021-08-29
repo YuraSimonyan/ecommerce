@@ -1,99 +1,107 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 section {
-  .product-loop {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .product-item {
-    width: 25%;
-    width: 280px;
-    max-height: 483px;
-    padding: 30px;
-
-    &__image {
-      width: 100%;
-      height: 321px;
-
-      img {
+    .product-loop {
         width: 100%;
-        height: 100%;
-      }
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
     }
 
-    &__name {
-      margin-top: 15px;
-      font-family: Arimo, Helvetica Neue, Arial, sans-serif;
-      font-size: 1.2rem;
-      line-height: 24px;
-      font-weight: 500;
-      color: #4f4f4f;;
-    }
+    .product-item {
+        position: relative;
+        max-width: 280px;
+        height: 483px;
+        padding: 30px;
 
-    &__price {
-      margin-top: 9px;
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 24px;
-      color: #000;
-    }
+        &__image {
+            width: 100%;
+            height: 321px;
 
-    &__button {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 146px;
-      height: 38px;
-      color: #fff;
-      background-color: #000;
-      border: 2px solid transparent;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      line-height: 20px;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
 
-    &__button:hover {
-      border-color: black;
-      color: black;
-      background: white;
+        &__name {
+            margin-top: 15px;
+            font-family: Arimo, Helvetica Neue, Arial, sans-serif;
+            font-size: 1.2rem;
+            line-height: 24px;
+            font-weight: 500;
+            color: #4f4f4f;;
+        }
+
+        &__price {
+            margin-top: 9px;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 24px;
+            color: #000;
+        }
+
+        &__action {
+            position: absolute;
+            max-width: 280px;
+            top: 450px;
+
+            .product-item__button {
+                display: flex;
+                width: 214px;
+                justify-content: center;
+                align-items: center;
+                min-width: 146px;
+                height: 38px;
+                color: #fff;
+                background-color: #000;
+                border: 2px solid transparent;
+                font-size: 14px;
+                font-weight: 700;
+                letter-spacing: .5px;
+                line-height: 20px;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+        }
+
+        &__button:hover {
+            border-color: black;
+            color: black;
+            background: white;
+        }
     }
-  }
 }
 
 .outline {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
 }
 
 .pagination a {
-  cursor: pointer;
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
+    cursor: pointer;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
 }
 
 .pagination a.active {
-  background-color: #4CAF50;
-  color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 .pagination a:hover:not(.active) {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 
