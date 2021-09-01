@@ -8,6 +8,8 @@ import {AddProductComponent} from './product-interactions/add-product/add-produc
 import {EditProductComponent} from './product-interactions/edit-products/edit-product/edit-product/edit-product.component';
 import {EditListProductsComponent} from './product-interactions/edit-products/edit-list-products.component';
 import {LoginComponent} from './login/login.component';
+import {FlexModule} from '@angular/flex-layout/typings/flex';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import {LoginComponent} from './login/login.component';
         SharedModule,
         ReactiveFormsModule,
         RouterModule,
+        FlexLayoutModule,
     ]
 })
 export class AdminModule {

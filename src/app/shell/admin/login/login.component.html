@@ -1,14 +1,20 @@
-<section>
-    <form action="" class="sign-form">
+<section  fxLayout="column" fxLayoutAlign="center center">
+    <form class="sign-form" fxLayout="column" fxFlex="30" [formGroup]="formGroup" (ngSubmit)="login()">
         <mat-form-field appearance="fill" class="sign-form__login">
-            <mat-label>Login</mat-label>
-            <input matInput>
+            <mat-label>email</mat-label>
+            <input matInput formControlName="email">
         </mat-form-field>
         <mat-form-field appearance="fill" class="sign-form__password">
             <mat-label>Password</mat-label>
-            <input matInput>
+            <input matInput formControlName="password">
         </mat-form-field>
-
-
+        <div class="sign-form__action" fxLayout="row" fxLayoutAlign="space-around">
+            <div class="sign-form__reset">
+                <button mat-raised-button color="warn" (click)="formGroup.reset()">Reset</button>
+            </div>
+            <div class="sign-form__login">
+                <button mat-raised-button color="primary" type="submit">Login</button>
+            </div>
+        </div>
     </form>
 </section>

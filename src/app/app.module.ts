@@ -25,7 +25,7 @@ import {ProductState} from './shared/store/product.state';
 import {FooterComponent} from './footer/footer.component';
 import {ServicesComponent} from './shell/main/services/services.component';
 import {AboutComponent} from './shell/main/about/about.component';
-import { LoginComponent } from './shell/admin/login/login.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -59,7 +59,8 @@ import { LoginComponent } from './shell/admin/login/login.component';
         NgxsLoggerPluginModule.forRoot({
             disabled: environment.production
         }),
-        MatIconModule
+        MatIconModule,
+        FlexLayoutModule
 
     ],
     providers: [],
