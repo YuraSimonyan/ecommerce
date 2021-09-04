@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
                 if (response['registered']) {
                     alert('success');
                 }
-            }, error => console.log(error.error['error'].message))
+            }, error => console.log(error.error['error'].message));
         }
 
     }
