@@ -10,6 +10,8 @@ import {EditListProductsComponent} from './product-interactions/edit-products/ed
 import {LoginComponent} from './login/login.component';
 import {FlexModule} from '@angular/flex-layout/typings/flex';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {AuthService} from '../../shared/services/auth.service';
+import {AuthGuard} from '../../shared/services/auth.guard';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         ReactiveFormsModule,
         RouterModule,
         FlexLayoutModule,
-    ]
+    ],
+    providers: [AuthService, AuthGuard]
 })
 export class AdminModule {
 }

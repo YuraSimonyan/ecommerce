@@ -1,5 +1,5 @@
 <section  fxLayout="column" fxLayoutAlign="center center">
-    <form class="sign-form" fxLayout="column" fxFlex="30" [formGroup]="formGroup" (ngSubmit)="login()">
+    <form class="sign-form" fxLayout="column" fxFlex="30" [formGroup]="formGroup" (ngSubmit)="onLogin()">
         <mat-form-field appearance="fill" class="sign-form__login">
             <mat-label>email</mat-label>
             <input matInput formControlName="email">

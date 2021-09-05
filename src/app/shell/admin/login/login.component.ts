@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpService} from '../../../shared/services/http.service';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -10,7 +10,7 @@ import {HttpService} from '../../../shared/services/http.service';
 export class LoginComponent implements OnInit {
     public formGroup: FormGroup;
 
-    constructor(private readonly httpService: HttpService) {
+    constructor(private readonly authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -21,15 +21,8 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    private login(): void {
-        if (this.formGroup.valid) {
-            this.httpService.loginRequest(this.formGroup.value).subscribe(response => {
-                if (response['registered']) {
-                    alert('success');
-                }
-            }, error => console.log(error.error['error'].message));
-        }
-
+    public onLogin(): void {
+        this.authService.login(this.formGroup);
     }
 
 
