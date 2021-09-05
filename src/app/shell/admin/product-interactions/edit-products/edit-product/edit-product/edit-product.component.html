@@ -1,3 +1,6 @@
+<div class="back-toAdmin">
+    <a routerLink="/admin">Вернуться назад</a>
+</div>
 <section *ngIf="productForm.controls['photos'].value">
     <form class="add-form" [formGroup]="productForm" (submit)="editProduct()">
         <mat-form-field appearance="fill" class="title">

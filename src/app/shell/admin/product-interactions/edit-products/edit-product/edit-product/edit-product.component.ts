@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
 import {GetProductsActionById} from '../../../../../../shared/store/product.action';
@@ -16,7 +16,7 @@ import {HttpService} from '../../../../../../shared/services/http.service';
     templateUrl: './edit-product.component.html',
     styleUrls: ['./edit-product.component.scss']
 })
-export class EditProductComponent implements OnInit {
+export class EditProductComponent implements OnInit, OnDestroy {
     productId;
 
     listStyles = this.filterService.styleList;
@@ -36,6 +36,9 @@ export class EditProductComponent implements OnInit {
         private readonly httpService: HttpService,
         private readonly router: Router
     ) {
+    }
+
+    ngOnDestroy(): void {
     }
 
     ngOnInit(): void {
