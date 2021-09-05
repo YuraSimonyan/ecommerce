@@ -97,8 +97,9 @@ section {
     .buttons{
       margin-top: 1rem;
       display: flex;
-      width: 70%;
-      justify-content: space-around;
+        flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
     }
   }
 }

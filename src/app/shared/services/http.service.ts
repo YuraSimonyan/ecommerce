@@ -20,13 +20,17 @@ export class HttpService {
 
     }
 
-    getProduct(): Observable<ProductModel[]> {
+    public getProduct(): Observable<ProductModel[]> {
         return this.http.get<ProductModel[]>('https://database-25cda-default-rtdb.firebaseio.com/products.json');
     }
 
     public loginRequest(userData): Observable<object> {
         const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDm3eyzZ4vxlKQ60R0lI5ZZfMnqxUjYs3w', userData, {headers})
+        return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDm3eyzZ4vxlKQ60R0lI5ZZfMnqxUjYs3w', userData, {headers});
 
+    }
+
+    public deleteItemById(id: string): Observable<any> {
+        return this.http.delete(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`);
     }
 }

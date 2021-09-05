@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
 import {GetProductsActionById} from '../../../../../../shared/store/product.action';
 import {ProductState} from '../../../../../../shared/store/product.state';
@@ -33,7 +33,8 @@ export class EditProductComponent implements OnInit {
         private readonly filterService: FilterService,
         private datePipe: DatePipe,
         private readonly productService: ProductService,
-        private readonly httpService: HttpService
+        private readonly httpService: HttpService,
+        private readonly router: Router
     ) {
     }
 
@@ -52,6 +53,11 @@ export class EditProductComponent implements OnInit {
         });
         this.productId = this.route.snapshot.params['id'];
         this.store.dispatch(new GetProductsActionById(this.productId));
+        this.setProductData();
+
+    }
+
+    public setProductData(): void {
         this.$productData.subscribe((value: ProductModel) => {
                 this.productForm.get('title').setValue(value.title);
                 this.productForm.get('description').setValue(value.description);
@@ -71,22 +77,22 @@ export class EditProductComponent implements OnInit {
         );
     }
 
-    editProduct(): void {
+    public editProduct(): void {
         const editedProduct = new ProductModel(
-            this.productForm.controls['title'].value,
-            this.productForm.controls['description'].value,
-            this.productForm.controls['style'].value,
-            this.productForm.controls['price'].value,
-            (!!this.productForm.controls['promotedPrice'].value),
-            this.productForm.controls['promotedPrice'].value,
+            this.productForm.get('title').value,
+            this.productForm.get('description').value,
+            this.productForm.get('style').value,
+            this.productForm.get('price').value,
+            (!!this.productForm.get('promotedPrice').value),
+            this.productForm.get('promotedPrice').value,
             this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
-            this.productForm.controls['material'].value,
-            this.productForm.controls['photos'].value);
+            this.productForm.get('material').value,
+            this.productForm.get('photos').value);
         this.httpService.editProduct(editedProduct, this.productId);
 
     }
 
-    onFileSelected(event): void {
+    public onFileSelected(event): void {
         const reader = new FileReader();
         if (event.target.files && event.target.files.length) {
             const file = event.target.files[0];
@@ -104,10 +110,21 @@ export class EditProductComponent implements OnInit {
     }
 
 
-    removePhoto(i: number): void {
+    public removePhoto(i: number): void {
         const photosArray = this.productForm.get('photos') as FormArray;
         photosArray.removeAt(i);
     }
 
 
+    public onReset(): void {
+        this.setProductData();
+    }
+
+    public onDelete(): void {
+        this.httpService.deleteItemById(this.productId).subscribe((response) => {
+            if (response === null) {
+                this.router.navigate(['/admin']).then();
+            }
+        });
+    }
 }
