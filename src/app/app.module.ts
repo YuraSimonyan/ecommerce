@@ -59,7 +59,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         NgxsLoggerPluginModule.forRoot({
             disabled: environment.production
         }),
-        MatIconModule,
         FlexLayoutModule
 
     ],

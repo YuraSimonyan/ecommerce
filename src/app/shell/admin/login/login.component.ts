@@ -9,16 +9,29 @@ import {AuthService} from '../../../shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
     public formGroup: FormGroup;
+    public errorObject;
 
-    constructor(private readonly authService: AuthService) {
+    constructor(public readonly authService: AuthService) {
     }
 
     ngOnInit(): void {
         this.formGroup = new FormGroup({
-            email: new FormControl('', Validators.required),
-            password: new FormControl('', Validators.required)
+            email: new FormControl('', [Validators.required]),
+            password: new FormControl('', [Validators.required])
 
         });
+        this.authService.error.subscribe((error) => {
+            if (error) {
+                if (error.message === 'INVALID_EMAIL' || error.message === 'EMAIL_NOT_FOUND') {
+                    this.formGroup.controls['email'].setErrors({'INVALID_EMAIL': true});
+                }
+                if (error.message === 'INVALID_PASSWORD' || error.message === 'EMAIL_NOT_FOUND') {
+                    this.formGroup.controls['password'].setErrors({'INVALID_PASSWORD': true});
+                }
+            }
+
+        });
+
     }
 
     public onLogin(): void {
@@ -26,4 +39,8 @@ export class LoginComponent implements OnInit {
     }
 
 
+    public reset(): void {
+        this.formGroup.reset();
+        console.log(this.formGroup);
+    }
 }

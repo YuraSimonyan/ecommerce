@@ -3,14 +3,20 @@
         <mat-form-field appearance="fill" class="sign-form__login">
             <mat-label>email</mat-label>
             <input matInput formControlName="email">
+            <mat-error *ngIf="formGroup.get('email').hasError('INVALID_EMAIL')">
+               Неправильный email
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="sign-form__password">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password">
+            <mat-error *ngIf="formGroup.get('password').hasError('INVALID_PASSWORD')">
+                Неправильный пароль
+            </mat-error>
         </mat-form-field>
         <div class="sign-form__action" fxLayout="row" fxLayoutAlign="space-around">
             <div class="sign-form__reset">
-                <button mat-raised-button color="warn" (click)="formGroup.reset()">Reset</button>
+                <button mat-raised-button color="warn" (click)="reset()">Reset</button>
             </div>
             <div class="sign-form__login">
                 <button mat-raised-button color="primary" type="submit">Login</button>

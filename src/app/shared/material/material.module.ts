@@ -37,7 +37,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
         MatSlideToggleModule,
         MatDialogModule,
         MatPaginatorModule,
-        ScrollingModule
+        ScrollingModule,
+        MatIconModule,
 
     ],
     exports: [
@@ -58,7 +59,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
         MatSlideToggleModule,
         MatDialogModule,
         MatPaginatorModule,
-        ScrollingModule
+        ScrollingModule,
+        MatIconModule
     ],
 
 

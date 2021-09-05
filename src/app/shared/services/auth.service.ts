@@ -1,21 +1,25 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {FormGroup} from '@angular/forms';
+import {BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly httpService: HttpService) {
+    private errorSubject$ = new BehaviorSubject(null);
+    public error = this.errorSubject$.asObservable();
 
+    constructor(private readonly httpService: HttpService, private router: Router) {
     }
 
     public login(formGroup: FormGroup): void {
         if (formGroup.valid) {
             this.httpService.loginRequest(formGroup.value).subscribe(response => {
                 if (response['registered']) {
-                    // window.localStorage.setItem('user', response)
                     window.localStorage.setItem('user', response['idToken']);
+                    this.router.navigate(['/admin']).then(r => r);
                 }
-            }, error => console.log(error.error.error.message));
+            }, error => this.errorSubject$.next(error.error.error));
         }
 
     }
