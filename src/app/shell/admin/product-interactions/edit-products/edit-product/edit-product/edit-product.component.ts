@@ -51,7 +51,7 @@ export class EditProductComponent implements OnInit {
             }),
             photos: new FormArray([], Validators.required),
         });
-        this.productId = this.route.snapshot.params['id'];
+        this.productId = this.route.snapshot.params.id;
         this.store.dispatch(new GetProductsActionById(this.productId));
         this.setProductData();
 
