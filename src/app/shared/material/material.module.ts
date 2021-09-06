@@ -17,6 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
         MatPaginatorModule,
         ScrollingModule,
         MatIconModule,
+        MatSnackBarModule
 
     ],
     exports: [
@@ -60,7 +62,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
         MatDialogModule,
         MatPaginatorModule,
         ScrollingModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule
     ],
 
 

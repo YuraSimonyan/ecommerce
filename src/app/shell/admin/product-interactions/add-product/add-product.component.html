@@ -1,71 +1,58 @@
 <section>
-  <form class="add-form" [formGroup]="productForm" (submit)="addProduct()" >
-    <mat-form-field appearance="fill" class="title">
-      <mat-label>Название продукта</mat-label>
-      <input matInput formControlName="title">
-    </mat-form-field>
-    <mat-form-field class="description">
-      <mat-label>Описание</mat-label>
-      <textarea
+    <form class="add-form" [formGroup]="productForm" (submit)="addProduct()">
+        <mat-form-field appearance="fill" class="title">
+            <mat-label>Название продукта</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="description">
+            <mat-label>Описание</mat-label>
+            <textarea
                 matInput
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="1"
                 cdkAutosizeMaxRows="5"
                 formControlName="description"></textarea>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="style">
-      <mat-label>Стиль</mat-label>
-      <mat-select formControlName="style">
-        <ng-container *ngFor="let item of listStyles">
-          <mat-option value="{{item}}">
-            {{item}}
-          </mat-option>
-        </ng-container>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="style">
+            <mat-label>Стиль</mat-label>
+            <mat-select formControlName="style">
+                <ng-container *ngFor="let item of listStyles">
+                    <mat-option value="{{item}}">
+                        {{item}}
+                    </mat-option>
+                </ng-container>
 
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="price">
-      <mat-label>цена</mat-label>
-      <input matInput formControlName="price" type="number">
-    </mat-form-field>
-    <hr>
-    <br>
-    <ng-container formGroupName="material">
-      <mat-form-field appearance="fill" class="material-name">
-        <mat-label>Название материала</mat-label>
-        <input matInput formControlName="materialName">
-      </mat-form-field>
-      <div class="material">
-        <label for="material" class="material-field" *ngIf="!productForm.get('material').get('materialPhoto').value.length">
-          <h5>Выберите материал</h5>
-          <input type="file" id="material"  (change)="onFileSelected($event)" class="materialImg">
-        </label>
-        <div class="material-photo" *ngIf="productForm.get('material').get('materialPhoto').value.length">
-          <img src="{{productForm.get('material').get('materialPhoto').value}}" alt="">
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="price">
+            <mat-label>цена</mat-label>
+            <input matInput formControlName="price" type="number">
+        </mat-form-field>
+        <hr>
+        <br>
+        <mat-form-field appearance="fill" class="material-name">
+            <mat-label>Название материала</mat-label>
+            <input matInput formControlName="materialName">
+        </mat-form-field>
+        <div class="photos">
+            <div class="photos-field">
+                Добавить фото продукта
+                <label for="photos">
+                    <mat-icon>upload_file</mat-icon>
+                    <input type="file" id="photos" (change)="onFileSelected($event)" class="photoName">
+                </label>
+            </div>
+            <div class="" *ngIf="productForm.get('photos').value.length">
+                <ng-container *ngFor="let item of productForm.get('photos').value">
+                    <div class="photos-list">
+                        <img src="{{item}}" alt="">
+                    </div>
+                </ng-container>
+            </div>
         </div>
-      </div>
-    </ng-container>
-    <div class="photos">
-      <div class="photos-field">
-        Добавить фото продукта
-        <label for="photos">
-      <mat-icon>upload_file</mat-icon>
-          <input type="file" id="photos" (change)="onFileSelected($event)" class="photoName">
-        </label>
-      </div>
-      <div class="" *ngIf="productForm.get('photos').value.length">
-        <ng-container *ngFor="let item of productForm.get('photos').value">
-          <div class="photos-list">
-            <img src="{{item}}" alt="">
-          </div>
-
-        </ng-container>
-
-      </div>
-    </div>
-    <div class="buttons">
-      <button mat-raised-button color="warn" type="button" (click)="onReset()">Очистить</button>
-      <button mat-raised-button color="primary" type="submit">Добавить</button>
-    </div>
-  </form>
+        <div class="buttons">
+            <button mat-raised-button color="warn" type="button" (click)="onReset()">Очистить</button>
+            <button mat-raised-button color="primary" type="submit">Добавить</button>
+        </div>
+    </form>
 </section>

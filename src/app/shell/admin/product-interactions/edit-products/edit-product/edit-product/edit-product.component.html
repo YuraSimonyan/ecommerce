@@ -53,32 +53,14 @@
                 [value]="productForm.get('description').value"
             >
         </mat-form-field>
-        <ng-container formGroupName="material">
-            <mat-form-field appearance="fill" class="material-name">
-                <mat-label>Название материала</mat-label>
-                <input
-                    matInput
-                    formControlName="materialName"
-                    [value]="productForm.get('material').get('materialName').value"
-                >
-            </mat-form-field>
-            <div class="material">
-                <mat-divider></mat-divider>
-                <label for="material" class="material-field"
-                       *ngIf="productForm.get('material').get('materialPhoto').value">
-                    <h5>Изменить фото материала
-                        <mat-icon>upload_file</mat-icon>
-                    </h5>
-                    <input type="file" id="material" (change)="onFileSelected($event)" class="materialImg">
-                </label>
-                <div
-                    class="material-photo"
-                    *ngIf="productForm.get('material').get('materialPhoto').value"
-                >
-                    <img src="{{productForm.get('material').get('materialPhoto').value}}" alt="">
-                </div>
-            </div>
-        </ng-container>
+        <mat-form-field appearance="fill" class="material-name">
+            <mat-label>Название материала</mat-label>
+            <input
+                matInput
+                formControlName="materialName"
+                [value]="productForm.get('materialName').value"
+            >
+        </mat-form-field>
         <div class="photos">
             <mat-divider></mat-divider>
             <div class="photos-field">

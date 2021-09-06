@@ -26,6 +26,7 @@ import {FooterComponent} from './footer/footer.component';
 import {ServicesComponent} from './shell/main/services/services.component';
 import {AboutComponent} from './shell/main/about/about.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { SnackBarComponent } from './shared/snack-bar/snack-bar/snack-bar.component';
 
 
 @NgModule({

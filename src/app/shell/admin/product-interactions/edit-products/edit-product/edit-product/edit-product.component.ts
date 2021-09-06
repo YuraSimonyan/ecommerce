@@ -10,6 +10,9 @@ import {DatePipe} from '@angular/common';
 import {FilterService} from '../../../../../../shared/services/filter.service';
 import {ProductService} from '../../../../../../shared/services/product.service';
 import {HttpService} from '../../../../../../shared/services/http.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpResponse} from '@angular/common/http';
+import {SnackBarComponent} from '../../../../../../shared/snack-bar/snack-bar/snack-bar.component';
 
 @Component({
     selector: 'app-edit-product',
@@ -34,7 +37,8 @@ export class EditProductComponent implements OnInit, OnDestroy {
         private datePipe: DatePipe,
         private readonly productService: ProductService,
         private readonly httpService: HttpService,
-        private readonly router: Router
+        private readonly router: Router,
+        private readonly snackBar: MatSnackBar
     ) {
     }
 
@@ -43,15 +47,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.productForm = new FormGroup({
-            title: new FormControl(),
-            description: new FormControl(),
-            style: new FormControl(),
-            price: new FormControl(),
+            title: new FormControl(null, [Validators.required, Validators.min(6), Validators.max(20)]),
+            description: new FormControl(null, [Validators.required, Validators.min(6), Validators.max(100)]),
+            style: new FormControl(null, Validators.required),
+            price: new FormControl(null, Validators.required),
             promotedPrice: new FormControl(),
-            material: new FormGroup({
-                materialName: new FormControl(),
-                materialPhoto: new FormControl(this.product?.material?.materialPhoto),
-            }),
+            materialName: new FormControl(null, Validators.required),
             photos: new FormArray([], Validators.required),
         });
         this.productId = this.route.snapshot.params.id;
@@ -67,8 +68,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
                 this.productForm.get('style').setValue(value.style);
                 this.productForm.get('price').setValue(value.price);
                 this.productForm.get('promotedPrice').setValue(value.promotedPrice);
-                this.productForm.get('material').get('materialName').setValue(value.material?.materialName);
-                this.productForm.get('material').get('materialPhoto').setValue(value.material?.materialPhoto);
+                this.productForm.get('materialName').setValue(value.materialName);
                 const arrayPhotos = this.productForm.get('photos') as FormArray;
                 if (value.img) {
                     for (const photo of value.img) {
@@ -81,17 +81,24 @@ export class EditProductComponent implements OnInit, OnDestroy {
     }
 
     public editProduct(): void {
-        const editedProduct = new ProductModel(
-            this.productForm.get('title').value,
-            this.productForm.get('description').value,
-            this.productForm.get('style').value,
-            this.productForm.get('price').value,
-            (!!this.productForm.get('promotedPrice').value),
-            this.productForm.get('promotedPrice').value,
-            this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
-            this.productForm.get('material').value,
-            this.productForm.get('photos').value);
-        this.httpService.editProduct(editedProduct, this.productId);
+        if (this.productForm.valid) {
+            const editedProduct = new ProductModel(
+                this.productForm.get('title').value,
+                this.productForm.get('description').value,
+                this.productForm.get('style').value,
+                this.productForm.get('price').value,
+                (!!this.productForm.get('promotedPrice').value),
+                this.productForm.get('promotedPrice').value,
+                this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+                this.productForm.get('materialName').value,
+                this.productForm.get('photos').value);
+            this.httpService.editProduct(editedProduct, this.productId).subscribe((response: HttpResponse<any>) => {
+                if (response.ok) {
+                    this.snackBar.openFromComponent(SnackBarComponent, {duration: 1000, data: {message: 'Продукт изминен'}});
+                }
+            });
+        }
+
 
     }
 
@@ -101,9 +108,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
             const file = event.target.files[0];
             reader.readAsDataURL(file);
             reader.onload = () => {
-                if (event.target.classList.contains('materialImg')) {
-                    this.productForm.get('material').get('materialPhoto').setValue(reader.result);
-                }
                 if (event.target.classList.contains('photoName')) {
                     const arrayPhotos = this.productForm.controls.photos as FormArray;
                     arrayPhotos.push(new FormControl(reader.result));
@@ -126,6 +130,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     public onDelete(): void {
         this.httpService.deleteItemById(this.productId).subscribe((response) => {
             if (response === null) {
+                this.snackBar.openFromComponent(SnackBarComponent, {duration: 1000, data: {message: 'Товар удален'}})
                 this.router.navigate(['/admin']).then();
             }
         });

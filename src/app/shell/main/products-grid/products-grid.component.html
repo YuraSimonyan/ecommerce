@@ -1,7 +1,7 @@
 <section>
     <div class="product-loop">
         <div class="product-item" *ngFor="let product of this.productService.listProducts">
-            <div class="product-item__image">
+            <div class="product-item__image" *ngIf="product?.img">
                 <img src="{{product?.img[0]}}" class="product-item__image">
             </div>
             <div class="product-item__name">{{product?.title}}</div>
