@@ -130,7 +130,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     public onDelete(): void {
         this.httpService.deleteItemById(this.productId).subscribe((response) => {
             if (response === null) {
-                this.snackBar.openFromComponent(SnackBarComponent, {duration: 1000, data: {message: 'Товар удален'}})
+                this.snackBar.openFromComponent(SnackBarComponent, {duration: 1000, data: {message: 'Товар удален'}});
                 this.router.navigate(['/admin']).then();
             }
         });

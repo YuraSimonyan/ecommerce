@@ -1,22 +1,20 @@
 <section>
-  <div class="filter">
-    <app-filter></app-filter>
-  </div>
-  <div class="main">
-    <div class="top-bar">
-      <div class="top-bar_sort">
-        <mat-form-field>
-          <mat-select placeholder="Сортувати по ціні">
-            <mat-select-trigger>
-            </mat-select-trigger>
-            <mat-option (click)="sortHigh()">За зменншенням цині</mat-option>
-            <mat-option (click)="sortLow()">За зростанням ціни</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <div class="filter">
+        <app-filter></app-filter>
     </div>
-    <div class="collection_grid">
-      <app-products-grid></app-products-grid>
+    <div class="main">
+        <div class="top-bar">
+            <div class="top-bar_sort">
+                <mat-form-field>
+                    <mat-select placeholder="Сортувати по ціні">
+                        <mat-option (click)="sortHigh()" value="Спочатку дешеві">За зменншенням ціни</mat-option>
+                        <mat-option (click)="sortLow()" value="Спочатку дорогі">За зростанням ціни</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="collection_grid">
+            <app-products-grid></app-products-grid>
+        </div>
     </div>
-  </div>
 </section>
