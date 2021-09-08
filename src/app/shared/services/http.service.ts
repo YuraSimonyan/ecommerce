@@ -16,12 +16,12 @@ export class HttpService {
     }
 
     editProduct(value, id): Observable<object> {
-        return this.http.patch(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`, value,   {observe: 'response' as 'body'});
+        return this.http.patch(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`, value, {observe: 'response' as 'body'});
 
     }
 
-    public getProduct(): Observable<ProductModel[]> {
-        return this.http.get<ProductModel[]>('https://database-25cda-default-rtdb.firebaseio.com/products.json');
+    public getProduct(value): Observable<ProductModel[]> {
+        return this.http.get<ProductModel[]>(`https://database-25cda-default-rtdb.firebaseio.com/products.json?orderBy="$key"&limitToFirst=${value}`);
     }
 
     public loginRequest(userData): Observable<object> {

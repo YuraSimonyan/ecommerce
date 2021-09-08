@@ -18,10 +18,11 @@ export class AddProductComponent implements OnInit {
     productForm: FormGroup;
     listStyles = this.filterService.styleList;
 
-    constructor(public datePipe: DatePipe,
-                public filterService: FilterService,
-                public readonly httpService: HttpService,
-                private snackBar: MatSnackBar
+    constructor(
+        public readonly datePipe: DatePipe,
+        public readonly filterService: FilterService,
+        public readonly httpService: HttpService,
+        private readonly snackBar: MatSnackBar
     ) {
     }
 
