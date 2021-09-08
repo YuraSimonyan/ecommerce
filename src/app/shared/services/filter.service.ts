@@ -8,7 +8,7 @@ import {SnackBarComponent} from '../snack-bar/snack-bar/snack-bar.component';
 @Injectable({providedIn: 'root'})
 export class FilterService implements OnDestroy {
     public filterState = new Subject();
-
+    public searchFilterText: string;
     public isModalOpen = false;
 
     public styleList = ['Плаття', 'Штани', 'Спортивний одяг',

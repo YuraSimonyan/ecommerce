@@ -16,7 +16,7 @@ import {ProductModel} from '../../../shared/models/product.model';
 export class ProductDetailComponent implements OnInit, OnDestroy {
     id: string;
     @Select(ProductState.productItem)
-    public productData: Observable<ProductModel>;
+    public productData$: Observable<ProductModel>;
     public mainPageNum = 0;
     public showPage = false;
     public imgLength;
@@ -32,7 +32,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
-        this.subscription = this.productData.subscribe(value => {
+        this.subscription = this.productData$.subscribe(value => {
             this.imgLength = value?.img?.length;
             if (Object.keys(value).length !== 0) {
                 this.showPage = true;

@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {FilterService} from '../shared/services/filter.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+    constructor(public readonly filterService: FilterService) {
 
-  }
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }
