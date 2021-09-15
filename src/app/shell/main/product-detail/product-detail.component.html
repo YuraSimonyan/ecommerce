@@ -2,7 +2,7 @@
 <section *ngIf="showPage">
   <div class="slider">
     <div class="slider__list">
-      <ng-container *ngFor="let img of (productData | async)?.img; let i = index">
+      <ng-container *ngFor="let img of (productData$ | async)?.img; let i = index">
         <div class="slider__list-item" (click)="onChangeImg($event, i)">
           <img src="{{img}}" alt="photo">
         </div>
@@ -15,7 +15,7 @@
       <div class="main-slider__icon-back" (click)="backMainImg()">
         <mat-icon>arrow_back</mat-icon>
       </div>
-      <img class="main-slider__image" src="{{(productData | async)?.img[mainPageNum]}}" alt="main image">
+      <img class="main-slider__image" src="{{(productData$ | async)?.img[mainPageNum]}}" alt="main image">
     </div>
   </div>
   <div class="info">
