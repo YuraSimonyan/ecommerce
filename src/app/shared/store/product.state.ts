@@ -9,7 +9,7 @@ import {ProductService} from '../services/product.service';
 
 export interface ProductStateModel {
     productData: ProductModel[];
-    productItem: any;
+    productItem: {};
 }
 
 @State<ProductStateModel>({
@@ -40,15 +40,16 @@ export class ProductState {
 
     @Action(GetProductsAction)
     GetProductsAction({patchState}: StateContext<ProductStateModel>): void {
-        this.httpService.getProduct(this.productService.productsAmount.value).pipe(take(1), map(((value: ProductModel[]) => {
+        this.httpService.getProduct(this.productService.productsAmount.value)
+            .pipe(take(1), map(((value: ProductModel[]) => {
 
-            const productArr = [];
-            for (const key in value) {
-                value[key]['id'] = key;
-                productArr.push(value[key]);
-            }
-            return productArr;
-        }))).subscribe(value => {
+                const productArr = [];
+                for (const key in value) {
+                    value[key]['id'] = key;
+                    productArr.push(value[key]);
+                }
+                return productArr;
+            }))).subscribe(value => {
             patchState({productData: value});
         });
     }
@@ -57,8 +58,8 @@ export class ProductState {
     GetProductsActionById(
         {patchState}: StateContext<ProductStateModel>,
         {id}: GetProductsActionById): void {
-        this.httpService.getProductById(id).pipe(take(1)).subscribe((value: ProductModel) => {
-            patchState({productItem: value});
+        this.httpService.getProductById(id).pipe(take(1)).subscribe((product: ProductModel) => {
+            patchState({productItem: product});
         });
     }
 }
