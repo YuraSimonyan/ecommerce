@@ -41,6 +41,7 @@ export class ProductState {
     @Action(GetProductsAction)
     GetProductsAction({patchState}: StateContext<ProductStateModel>): void {
         this.httpService.getProduct(this.productService.productsAmount.value).pipe(map(((value: ProductModel[]) => {
+
             const productArr = [];
             for (const key in value) {
                 value[key]['id'] = key;

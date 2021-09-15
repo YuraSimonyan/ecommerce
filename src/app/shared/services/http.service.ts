@@ -11,11 +11,11 @@ export class HttpService {
     }
 
 
-    addValueDataBase(value: ProductModel): Observable<object> {
+    public addValueDataBase(value: ProductModel): Observable<object> {
         return this.http.post<ProductModel>('https://database-25cda-default-rtdb.firebaseio.com/products.json', value, {observe: 'response' as 'body'});
     }
 
-    editProduct(value, id): Observable<object> {
+    public editProduct(value, id): Observable<object> {
         return this.http.patch(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`, value, {observe: 'response' as 'body'});
 
     }
