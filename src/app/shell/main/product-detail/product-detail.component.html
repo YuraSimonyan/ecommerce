@@ -10,7 +10,7 @@
         </div>
         <div class="main-slider">
             <div class="main-slider__icon-forward" (click)="nextMainImg()">
-                <mat-icon >arrow_forward</mat-icon>
+                <mat-icon>arrow_forward</mat-icon>
             </div>
             <div class="main-slider__icon-back" (click)="backMainImg()">
                 <mat-icon style="color: white">arrow_back</mat-icon>
@@ -24,10 +24,7 @@
         </div>
         <div class="info__price">₴{{(productData$ | async)?.price}}</div>
         <div class="info__material">
-            <div class="info__material-name">{{(productData$ | async)?.material?.materialName}}</div>
-            <div class="info__material-image">
-                <img src="{{(productData$ | async)?.material?.materialPhoto}}" alt="photo">
-            </div>
+            <div class="info__material-name">{{(productData$ | async)?.materialName}}</div>
         </div>
         <div class="info__size">
             <button class="info__size-button" type="button" (click)="openDialog()">ПІДИБРАТІ РОЗМІР</button>
