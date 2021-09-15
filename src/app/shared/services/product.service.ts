@@ -8,7 +8,7 @@ import {Store} from '@ngxs/store';
 export class ProductService {
     public initListProductsSubject = new BehaviorSubject(null);
     public listProducts: ProductModel[];
-    public productsAmount = new BehaviorSubject(10);
+    public productsAmount = new BehaviorSubject(12);
 
     constructor(private readonly store: Store) {
     }
