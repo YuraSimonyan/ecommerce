@@ -29,7 +29,9 @@ export class HttpService {
         return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDm3eyzZ4vxlKQ60R0lI5ZZfMnqxUjYs3w', userData, {headers});
 
     }
-
+    public getProductById(id: string): Observable<any> {
+        return this.http.get(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`);
+    }
     public deleteItemById(id: string): Observable<any> {
         return this.http.delete(`https://database-25cda-default-rtdb.firebaseio.com/products/${id}.json`);
     }

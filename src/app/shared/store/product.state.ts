@@ -2,7 +2,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {ProductModel} from '../models/product.model';
 import {GetProductsAction, GetProductsActionById} from './product.action';
-import {map} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {FilterService} from '../services/filter.service';
 import {HttpService} from '../services/http.service';
 import {ProductService} from '../services/product.service';
@@ -40,7 +40,7 @@ export class ProductState {
 
     @Action(GetProductsAction)
     GetProductsAction({patchState}: StateContext<ProductStateModel>): void {
-        this.httpService.getProduct(this.productService.productsAmount.value).pipe(map(((value: ProductModel[]) => {
+        this.httpService.getProduct(this.productService.productsAmount.value).pipe(take(1), map(((value: ProductModel[]) => {
 
             const productArr = [];
             for (const key in value) {
@@ -57,8 +57,8 @@ export class ProductState {
     GetProductsActionById(
         {patchState}: StateContext<ProductStateModel>,
         {id}: GetProductsActionById): void {
-        this.httpService.getProduct(this.productService.productsAmount.value).subscribe(value => {
-            patchState({productItem: value[id]});
+        this.httpService.getProductById(id).pipe(take(1)).subscribe((value: ProductModel) => {
+            patchState({productItem: value});
         });
     }
 }
