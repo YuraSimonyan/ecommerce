@@ -39,8 +39,6 @@ import {FilterService} from './shared/services/filter.service';
         FooterComponent,
         ServicesComponent,
         AboutComponent,
-
-
     ],
     imports: [
         CommonModule,
@@ -60,7 +58,6 @@ import {FilterService} from './shared/services/filter.service';
             disabled: environment.production
         }),
         FlexLayoutModule
-
     ],
     providers: [FilterService],
     bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FilterService} from '../shared/services/filter.service';
 
 @Component({
@@ -6,13 +6,9 @@ import {FilterService} from '../shared/services/filter.service';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
     constructor(public readonly filterService: FilterService) {
-
-    }
-
-    ngOnInit(): void {
     }
 
 }
