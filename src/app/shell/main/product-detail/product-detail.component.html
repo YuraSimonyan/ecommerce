@@ -1,49 +1,49 @@
 <mat-progress-bar *ngIf="!showPage" mode="indeterminate"></mat-progress-bar>
 <section *ngIf="showPage">
-  <div class="slider">
-    <div class="slider__list">
-      <ng-container *ngFor="let img of (productData$ | async)?.img; let i = index">
-        <div class="slider__list-item" (click)="onChangeImg($event, i)">
-          <img src="{{img}}" alt="photo">
+    <div class="slider">
+        <div class="slider__list">
+            <ng-container *ngFor="let img of (productData$ | async)?.img; let i = index">
+                <div class="slider__list-item" (click)="onChangeImg($event, i)">
+                    <img src="{{img}}" alt="photo">
+                </div>
+            </ng-container>
         </div>
-      </ng-container>
+        <div class="main-slider">
+            <div class="main-slider__icon-forward" (click)="nextMainImg()">
+                <mat-icon >arrow_forward</mat-icon>
+            </div>
+            <div class="main-slider__icon-back" (click)="backMainImg()">
+                <mat-icon style="color: white">arrow_back</mat-icon>
+            </div>
+            <img class="main-slider__image" src="{{(productData$ | async)?.img[mainPageNum]}}" alt="main image">
+        </div>
     </div>
-    <div class="main-slider">
-      <div class="main-slider__icon-forward" (click)="nextMainImg()">
-        <mat-icon>arrow_forward</mat-icon>
-      </div>
-      <div class="main-slider__icon-back" (click)="backMainImg()">
-        <mat-icon>arrow_back</mat-icon>
-      </div>
-      <img class="main-slider__image" src="{{(productData$ | async)?.img[mainPageNum]}}" alt="main image">
+    <div class="info">
+        <div class="info__header">
+            {{(productData$ | async)?.title }}
+        </div>
+        <div class="info__price">₴{{(productData$ | async)?.price}}</div>
+        <div class="info__material">
+            <div class="info__material-name">{{(productData$ | async)?.material?.materialName}}</div>
+            <div class="info__material-image">
+                <img src="{{(productData$ | async)?.material?.materialPhoto}}" alt="photo">
+            </div>
+        </div>
+        <div class="info__size">
+            <button class="info__size-button" type="button" (click)="openDialog()">ПІДИБРАТІ РОЗМІР</button>
+        </div>
+        <div class="info__divider">
+            <mat-divider></mat-divider>
+        </div>
+        <div class="info__description">
+            <div class="info__description-header">ДЕТАЛІ</div>
+            <p class="info__description-text">{{(productData$ | async)?.description}}</p>
+        </div>
+        <div class="info__phone">
+            <a href="tel:+380633453766" id="phone">
+                +38-063-345-37-66
+                <p>Для замовлення та уточнення деталей</p>
+            </a>
+        </div>
     </div>
-  </div>
-  <div class="info">
-    <div class="info__header">
-      {{(productData$ | async)?.title }}
-    </div>
-    <div class="info__price">₴{{(productData$ | async)?.price}}</div>
-    <div class="info__material">
-      <div class="info__material-name">{{(productData$ | async)?.material?.materialName}}</div>
-      <div class="info__material-image">
-        <img src="{{(productData$ | async)?.material?.materialPhoto}}"  alt="photo">
-      </div>
-    </div>
-    <div class="info__size">
-      <button class="info__size-button" type="button" (click)="openDialog()">ПІДИБРАТІ РОЗМІР</button>
-    </div>
-    <div class="info__divider">
-      <mat-divider></mat-divider>
-    </div>
-    <div class="info__description">
-      <div class="info__description-header">ДЕТАЛІ</div>
-      <p class="info__description-text">{{(productData$ | async)?.description}}</p>
-    </div>
-    <div class="info__phone">
-      <a href="tel:+380633453766" id="phone">
-        +38-063-345-37-66
-        <p>Для замовлення та уточнення деталей</p>
-      </a>
-    </div>
-  </div>
 </section>
