@@ -4,17 +4,13 @@ import {ProductService} from './product.service';
 import {FilterModel} from '../models/filter.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SnackBarComponent} from '../snack-bar/snack-bar/snack-bar.component';
+import {styleList} from '../../../assets/style-list/style-list';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class FilterService implements OnDestroy {
-    public filterState = new Subject();
     public searchFilterText: string;
     public isModalOpen = false;
-
-    public styleList = ['Плаття', 'Штани', 'Спортивний одяг',
-        'Куртки', 'Пальта', 'Футболки',
-        'Майки', 'кардигани', 'шорти', 'комбенізони',
-        'Халати', 'блузки', 'спідниці', 'жилетки', 'спецодяг', 'сумки'];
+    public styleList = styleList;
     public clearFilterSubject = new BehaviorSubject(null);
     public filters: FilterModel = {
         style: '',
@@ -24,63 +20,69 @@ export class FilterService implements OnDestroy {
         }
     };
     public appliedFilters = new BehaviorSubject(this.filters);
+    private filterStateSubject = new Subject();
+    public filterState$ = this.filterStateSubject.asObservable();
 
     constructor(private readonly productService: ProductService, private readonly snackBar: MatSnackBar) {
 
-        this.filterState.subscribe((value: FilterModel) => {
-            if (value?.price.min && !value?.price.max && !value.style) {
-                alert(1);
+        this.filterState$.subscribe((filters: FilterModel) => {
+            if (!filters?.price.min && !!filters?.price.max && filters.style) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
-                    .filter((item => item.price >= value?.price.min));
+                    .filter((item => item.style === filters?.style));
 
                 return;
             }
-            if (value?.price.min > value?.price.max) {
-                alert(2);
+            if (filters?.price.min && !filters?.price.max && !filters.style) {
+                this.productService.listProducts = this.productService.initListProductsSubject.value
+                    .filter((item => item.price >= filters?.price.min));
+
+                return;
+            }
+            if (filters?.price.min > filters?.price.max) {
                 this.snackBar.openFromComponent(SnackBarComponent, {duration: 500, data: {message: 'Неправильно заданий фільтр'}});
 
                 return;
             }
-            if (!value?.price.max && !value.price.min && !value.style) {
+            if (!filters?.price.max && !filters.price.min && !filters.style) {
                 this.clearFilter();
                 return;
             }
-            if (value?.price.max && !value.price.min && !value.style) {
+            if (filters?.price.max && !filters.price.min && !filters.style) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
-                    .filter((item => item.price <= value?.price.max));
+                    .filter((item => item.price <= filters?.price.max));
 
                 return;
             }
 
-            if (value?.price.min && value?.price.max && !value.style) {
+            if (filters?.price.min && filters?.price.max && !filters.style) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
                     .filter(
-                        ((item) => (+item.price) >= value?.price.min && (+item.price) <= value?.price.max));
+                        ((item) => (+item.price) >= filters?.price.min && (+item.price) <= filters?.price.max));
 
                 return;
             }
-            if (value?.price.min && value?.price.max && value.style) {
+            if (filters?.price.min && filters?.price.max && filters.style) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
                     .filter(
-                        (item => item.style === value.style && item.price >= value?.price.min && item.price <= value.price.max));
+                        (item => item.style === filters.style && item.price >= filters?.price.min && item.price <= filters.price.max));
 
                 return;
             }
-            if (value?.style && !value?.price.min && !value?.price.max) {
+            if (filters?.style && !filters?.price.min && !filters?.price.max) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
-                    .filter(item => item.style === value?.style);
+                    .filter(item => item.style === filters?.style);
 
                 return;
             }
-            if (value?.style && value?.price.min && !value?.price.max) {
+            if (filters?.style && filters?.price.min && !filters?.price.max) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
-                    .filter(item => item.style === value?.style && item.price >= value?.price.min);
+                    .filter(item => item.style === filters?.style && item.price >= filters?.price.min);
 
                 return;
             }
-            if (value?.style && !value?.price.min && value?.price.max) {
+            if (filters?.style && !filters?.price.min && filters?.price.max) {
                 this.productService.listProducts = this.productService.initListProductsSubject.value
-                    .filter(item => item.style === value?.style && item.price <= value?.price.max);
+                    .filter(item => item.style === filters?.style && item.price <= filters?.price.max);
 
                 return;
             }
@@ -88,15 +90,15 @@ export class FilterService implements OnDestroy {
 
     }
 
-    sortHigh(): void {
+    public sortHigh(): void {
         this.productService.listProducts.sort((a, b) => a.price - b.price);
     }
 
-    sortLow(): void {
+    public sortLow(): void {
         this.productService.listProducts.sort((a, b) => b.price - a.price);
     }
 
-    clearFilter(): void {
+    public clearFilter(): void {
         for (const item in this.appliedFilters.value) {
             if (typeof this.appliedFilters.value[item] === 'object') {
                 for (const subItem in this.appliedFilters.value[item]) {
@@ -110,7 +112,7 @@ export class FilterService implements OnDestroy {
     }
 
     searchFilter(): void {
-        this.filterState.next(this.appliedFilters.value);
+        this.filterStateSubject.next(this.appliedFilters.value);
     }
 
 

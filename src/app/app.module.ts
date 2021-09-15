@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {MatIconModule} from '@angular/material/icon';
 
 
 import {AppRoutingModule} from './app-routing.module';
@@ -26,7 +25,7 @@ import {FooterComponent} from './footer/footer.component';
 import {ServicesComponent} from './shell/main/services/services.component';
 import {AboutComponent} from './shell/main/about/about.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { SnackBarComponent } from './shared/snack-bar/snack-bar/snack-bar.component';
+import {FilterService} from './shared/services/filter.service';
 
 
 @NgModule({
@@ -63,7 +62,7 @@ import { SnackBarComponent } from './shared/snack-bar/snack-bar/snack-bar.compon
         FlexLayoutModule
 
     ],
-    providers: [],
+    providers: [FilterService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

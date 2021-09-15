@@ -27,7 +27,7 @@ export class FilterComponent implements OnInit {
     }
 
 
-    public searchFilter(): void {
+    public applyFilters(): void {
         this.filterService.searchFilter();
     }
 
