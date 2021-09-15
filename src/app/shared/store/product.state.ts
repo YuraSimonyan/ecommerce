@@ -9,14 +9,25 @@ import {ProductService} from '../services/product.service';
 
 export interface ProductStateModel {
     productData: ProductModel[];
-    productItem: {};
+    productItem: ProductModel;
 }
 
 @State<ProductStateModel>({
     name: 'product',
     defaults: {
         productData: [],
-        productItem: {}
+        productItem: {
+            title: null,
+            description: null,
+            style: null,
+            price: null,
+            isPromoted: null,
+            promotedPrice: null,
+            date: null,
+            materialName: null,
+            img: [],
+            id: null
+        }
     }
 })
 @Injectable()
@@ -34,7 +45,7 @@ export class ProductState {
     }
 
     @Selector()
-    static productItem(state: ProductStateModel): ProductModel[] {
+    static productItem(state: ProductStateModel): ProductModel {
         return state.productItem;
     }
 
@@ -49,8 +60,8 @@ export class ProductState {
                     productArr.push(value[key]);
                 }
                 return productArr;
-            }))).subscribe(value => {
-            patchState({productData: value});
+            }))).subscribe((products: ProductModel[]) => {
+            patchState({productData: products});
         });
     }
 
